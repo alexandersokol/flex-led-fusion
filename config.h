@@ -12,11 +12,9 @@
 #define PIN_IR_RECEIVE A4
 #define PIN_LED_STRIP 6
 
-// IR
-#define DECODE_NEC
-
 // VARIABLES
 #define IS_LOGS_ON 1
+#define IS_IR_ON 1
 
 // Commands
 #define COMMAND_EMPTY 0

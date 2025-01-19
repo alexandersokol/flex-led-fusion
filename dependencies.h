@@ -3,8 +3,8 @@
 
 #include "config.h"
 #include "logging.h"
+#include "ir.h"
 
 #include "GyverButton.h"
-#include <IRremote.hpp> 
 
 #endif // DEPENDENCIES_H
