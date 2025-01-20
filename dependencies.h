@@ -16,5 +16,6 @@
 #include "effect_one_sin_pal.h"
 #include "effect_juggle_pal.h"
 #include "effect_matrix_pal.h"
+#include "effect_noise16_pal.h"
 
 #endif // DEPENDENCIES_H
