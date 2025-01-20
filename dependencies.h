@@ -22,5 +22,6 @@
 #include "effect_rainbow_march.h"
 #include "effect_serendipitous_pal.h"
 #include "effect_three_sin_pal.h"
+#include "effect_fire.h"
 
 #endif // DEPENDENCIES_H
