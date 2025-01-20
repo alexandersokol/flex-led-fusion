@@ -27,6 +27,7 @@ uint8_t startindex = 0;
 uint8_t bgclr = 0;
 uint8_t bgbri = 0;
 uint8_t wavebright = 255;
+uint8_t thisbeat;
 
 CRGBPalette16 gCurrentPalette;
 

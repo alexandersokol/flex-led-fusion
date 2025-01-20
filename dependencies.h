@@ -14,5 +14,6 @@
 #include "effect_rainbow_beat.h"
 #include "effect_two_sin.h"
 #include "effect_one_sin_pal.h"
+#include "effect_juggle_pal.h"
 
 #endif // DEPENDENCIES_H
