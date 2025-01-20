@@ -19,5 +19,6 @@
 #include "effect_noise8_pal.h"
 #include "effect_noise16_pal.h"
 #include "effect_plasma.h"
+#include "effect_rainbow_march.h"
 
 #endif // DEPENDENCIES_H
