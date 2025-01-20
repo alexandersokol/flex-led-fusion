@@ -596,13 +596,12 @@ void strobe_mode(uint8_t mode, bool mc) {                  // mc stands for 'Mod
       break;
 
   } // switch mode
-#if LOG_ON == 1
+
   if (mc) {
-    if ( palchg == 0 ) Serial.println(F("Change palette off"));
-    else if ( palchg == 1 ) Serial.println(F("Change palette Stop"));
-    else if ( palchg == 3 ) Serial.println(F("Change palette ON"));
+    if (palchg == 0) LOG_PRINTLN("Change palette off");
+    else if (palchg == 1) LOG_PRINTLN("Change palette Stop");
+    else if (palchg == 3) LOG_PRINTLN("Change palette ON");
   }
-#endif
 
 } // strobe_mode()
 
