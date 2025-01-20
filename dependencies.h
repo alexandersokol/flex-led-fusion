@@ -7,6 +7,7 @@
 #include "buttons.h"
 #include "effects.h"
 #include "utilities.h"
+#include "gradient_palettes.h"
 
 #include "effect_confetti_pal.h"
 #include "effect_blendwave.h"
