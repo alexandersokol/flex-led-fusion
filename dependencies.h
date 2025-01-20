@@ -24,5 +24,6 @@
 #include "effect_three_sin_pal.h"
 #include "effect_fire.h"
 #include "effect_candles.h"
+#include "effect_colorwave.h"
 
 #endif // DEPENDENCIES_H
