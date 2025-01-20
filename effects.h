@@ -56,15 +56,58 @@ uint16_t meshdelay;
 #include "effect_candles.h"
 #include "effect_colorwave.h"
 
+#define EFFECT_BLEND_WAVE 0
+#define EFFECT_RAINBOW_BEAT 1
+#define EFFECT_TWO_SIN_1 2
+#define EFFECT_ONE_SIN_1 3
+#define EFFECT_NOISE8_1 4
+#define EFFECT_TWO_SIN_2 5
+#define EFFECT_ONE_SIN_2 6
+#define EFFECT_JUGGLE_1 7
+#define EFFECT_MATRIX_1 8
+#define EFFECT_TWO_SIN_3 9
+#define EFFECT_ONE_SIN_3 10
+#define EFFECT_THREE_SIN_1 11
+#define EFFECT_SERENDIPITOUS 12
+#define EFFECT_ONE_SIN_4 13
+#define EFFECT_TWO_SIN_4 14
+#define EFFECT_MATRIX_2 15
+#define EFFECT_NOISE8_2 16
+#define EFFECT_PLASMA_1 17
+#define EFFECT_TWO_SIN_5 18
+#define EFFECT_RAINBOW_MARCH_1 19
+#define EFFECT_THREE_SIN_2 20
+#define EFFECT_RAINBOW_MARCH_2 21
+#define EFFECT_NOISE16_1 22
+#define EFFECT_ONE_SIN_5 23
+#define EFFECT_PLASMA_2 24
+#define EFFECT_CONFETTI_1 25
+#define EFFECT_TWO_SIN_6 26
+#define EFFECT_MATRIX_3 27
+#define EFFECT_ONE_SIN_6 28
+#define EFFECT_CONFETTI_2 29
+#define EFFECT_PLASMA_3 30
+#define EFFECT_JUGGLE_2 31
+#define EFFECT_ONE_SIN_7 32
+#define EFFECT_THREE_SIN_3 33
+#define EFFECT_RAINBOW_MARCH_3 34
+#define EFFECT_PLASMA_4 35
+#define EFFECT_CONFETTI_3 36
+#define EFFECT_NOISE16_2 37
+#define EFFECT_NOISE8_3 38
+#define EFFECT_FIRE 39
+#define EFFECT_CANDLES 40
+#define EFFECT_COLORWAVES 41
+
+#define EFFECT_TEST_PALLETE_CHANGE 100
+#define EFFECT_TEST_LED_COUNT 200
+#define EFFECT_TEST_MESH_DELAY 201
+
 void strobe_mode(uint8_t mode, bool mc) {                  // mc stands for 'Mode Change', where mc = 0 is strobe the routine, while mc = 1 is change the routine
 
   if (mc) {
     fill_solid(leds, ledCount, CRGB(0, 0, 0));                // Clean up the array for the first time through. Don't show display though, so you may have a smooth transition.
-#if LOG_ON == 1
-    Serial.print(F("Mode: "));
-    Serial.println(mode);
-    Serial.println(millis());
-#endif
+
 #if PALETTE_TIME>0
     if (palchg == 0) palchg = 3;
 #else
@@ -72,18 +115,23 @@ void strobe_mode(uint8_t mode, bool mc) {                  // mc stands for 'Mod
 #endif
   }
 
-
   switch (mode) {                                          // First time through a new mode, so let's initialize the variables for a given display.
-
-    case  0: if (mc) {
+    case EFFECT_BLEND_WAVE: 
+      if (mc) {
         thisdelay = 10;
         palchg = 0;
-      } blendwave(); break;
-    case  1: if (mc) {
+      }
+      blendwave();
+      break;
+    case EFFECT_RAINBOW_BEAT:
+      if (mc) {
         thisdelay = 10;
         palchg = 0;
-      } rainbow_beat(); break;
-    case  2: if (mc) {
+      }
+      rainbow_beat();
+      break;
+    case EFFECT_TWO_SIN_1:
+      if (mc) {
         thisdelay = 10;
         allfreq = 2;
         thisspeed = 1;
@@ -95,8 +143,11 @@ void strobe_mode(uint8_t mode, bool mc) {                  // mc stands for 'Mod
         thatrot = 1;
         thiscutoff = 128;
         thatcutoff = 192;
-      } two_sin(); break;
-    case  3: if (mc) {
+      }
+      two_sin();
+      break;
+    case EFFECT_ONE_SIN_1:
+      if (mc) {
         thisdelay = 20;
         allfreq = 4;
         bgclr = 0;
@@ -109,11 +160,17 @@ void strobe_mode(uint8_t mode, bool mc) {                  // mc stands for 'Mod
         thisrot = 0;
         thisspeed = 4;
         wavebright = 255;
-      } one_sin_pal(); break;
-    case  4: if (mc) {
+      }
+      one_sin_pal();
+      break;
+    case EFFECT_NOISE8_1:
+      if (mc) {
         thisdelay = 10;
-      } noise8_pal(); break;
-    case  5: if (mc) {
+      }
+      noise8_pal();
+      break;
+    case EFFECT_TWO_SIN_2:
+      if (mc) {
         thisdelay = 10;
         allfreq = 4;
         thisspeed = -1;
@@ -125,8 +182,11 @@ void strobe_mode(uint8_t mode, bool mc) {                  // mc stands for 'Mod
         thatrot = 0;
         thiscutoff = 64;
         thatcutoff = 192;
-      } two_sin(); break;
-    case  6: if (mc) {
+      }
+      two_sin();
+      break;
+    case EFFECT_ONE_SIN_2:
+      if (mc) {
         thisdelay = 20;
         allfreq = 10;
         bgclr = 64;
@@ -139,23 +199,32 @@ void strobe_mode(uint8_t mode, bool mc) {                  // mc stands for 'Mod
         thisrot = 0;
         thisspeed = 4;
         wavebright = 255;
-      } one_sin_pal(); break;
-    case  7: if (mc) {
+      }
+      one_sin_pal();
+      break;
+    case EFFECT_JUGGLE_1:
+      if (mc) {
         thisdelay = 10;
         numdots = 2;
         thisfade = 16;
         thisbeat = 8;
         thisdiff = 64;
-      } juggle_pal(); break;
-    case  8: if (mc) {
+      }
+      juggle_pal();
+      break;
+    case EFFECT_MATRIX_1:
+      if (mc) {
         thisdelay = 40;
         thisindex = 128;
         thisdir = 1;
         thisrot = 0;
         bgclr = 200;
         bgbri = 6;
-      } matrix_pal(); break;
-    case  9: if (mc) {
+      }
+      matrix_pal();
+      break;
+    case EFFECT_TWO_SIN_3:
+      if (mc) {
         thisdelay = 10;
         allfreq = 6;
         thisspeed = 2;
@@ -167,8 +236,11 @@ void strobe_mode(uint8_t mode, bool mc) {                  // mc stands for 'Mod
         thatrot = 0;
         thiscutoff = 64;
         thatcutoff = 64;
-      } two_sin(); break;
-    case 10: if (mc) {
+      }
+      two_sin();
+      break;
+    case EFFECT_ONE_SIN_3:
+      if (mc) {
         thisdelay = 20;
         allfreq = 16;
         bgclr = 0;
@@ -181,17 +253,26 @@ void strobe_mode(uint8_t mode, bool mc) {                  // mc stands for 'Mod
         thisrot = 0;
         thisspeed = 4;
         wavebright = 255;
-      } one_sin_pal(); break;
-    case 11: if (mc) {
+      }
+      one_sin_pal();
+      break;
+    case EFFECT_THREE_SIN_1:
+      if (mc) {
         thisdelay = 50;
         mul1 = 5;
         mul2 = 8;
         mul3 = 7;
-      } three_sin_pal(); break;
-    case 12: if (mc) {
+      }
+      three_sin_pal();
+      break;
+    case EFFECT_SERENDIPITOUS:
+      if (mc) {
         thisdelay = 10;
-      } serendipitous_pal(); break;
-    case 13: if (mc) {
+      }
+      serendipitous_pal();
+      break;
+    case EFFECT_ONE_SIN_4:
+      if (mc) {
         thisdelay = 20;
         allfreq = 8;
         bgclr = 0;
@@ -204,8 +285,11 @@ void strobe_mode(uint8_t mode, bool mc) {                  // mc stands for 'Mod
         thisrot = 0;
         thisspeed = 4;
         wavebright = 255;
-      } one_sin_pal(); break;
-    case 14: if (mc) {
+      }
+      one_sin_pal();
+      break;
+    case EFFECT_TWO_SIN_4:
+      if (mc) {
         thisdelay = 10;
         allfreq = 20;
         thisspeed = 2;
@@ -217,22 +301,34 @@ void strobe_mode(uint8_t mode, bool mc) {                  // mc stands for 'Mod
         thatrot = 1;
         thiscutoff = 64;
         thatcutoff = 128;
-      } two_sin(); break;
-    case 15: if (mc) {
+      }
+      two_sin();
+      break;
+    case EFFECT_MATRIX_2:
+      if (mc) {
         thisdelay = 50;
         thisindex = 64;
         thisdir = -1;
         thisrot = 1;
         bgclr = 100;
         bgbri = 10;
-      } matrix_pal(); break;
-    case 16: if (mc) {
+      }
+      matrix_pal();
+      break;
+    case EFFECT_NOISE8_2:
+      if (mc) {
         thisdelay = 10;
-      } noise8_pal(); break; // By: Andrew Tuline
-    case 17: if (mc) {
+      }
+      noise8_pal();
+      break; // By: Andrew Tuline
+    case EFFECT_PLASMA_1:
+      if (mc) {
         thisdelay = 10;
-      } plasma(11, 23, 4, 18); break;
-    case 18: if (mc) {
+      }
+      plasma(11, 23, 4, 18);
+      break;
+    case EFFECT_TWO_SIN_5:
+      if (mc) {
         thisdelay = 20;
         allfreq = 10;
         thisspeed = 1;
@@ -244,28 +340,40 @@ void strobe_mode(uint8_t mode, bool mc) {                  // mc stands for 'Mod
         thatrot = -1;
         thiscutoff = 128;
         thatcutoff = 192;
-      } two_sin(); break;
-    case 19: if (mc) {
+      }
+      two_sin();
+      break;
+    case EFFECT_RAINBOW_MARCH_1:
+      if (mc) {
         thisdelay = 50;
         palchg = 0;
         thisdir = 1;
         thisrot = 1;
         thisdiff = 1;
-      } rainbow_march(); break;
-    case 20: if (mc) {
+      }
+      rainbow_march();
+      break;
+    case EFFECT_THREE_SIN_2:
+      if (mc) {
         thisdelay = 10;
         mul1 = 6;
         mul2 = 9;
         mul3 = 11;
-      } three_sin_pal(); break;
-    case 21: if (mc) {
+      }
+      three_sin_pal();
+      break;
+    case EFFECT_RAINBOW_MARCH_2:
+      if (mc) {
         thisdelay = 10;
         palchg = 0;
         thisdir = 1;
         thisrot = 2;
         thisdiff = 10;
-      } rainbow_march(); break;
-    case 22: if (mc) {
+      }
+      rainbow_march();
+      break;
+    case EFFECT_NOISE16_1:
+      if (mc) {
         thisdelay = 20;
         palchg = 0;
         hxyinc = random16(1, 15);
@@ -278,8 +386,11 @@ void strobe_mode(uint8_t mode, bool mc) {                  // mc stands for 'Mod
         hue_time = random16();
         hue_speed = random16(1, 3);
         x_speed = random16(1, 30);
-      } noise16_pal(); break;
-    case 23: if (mc) {
+      }
+      noise16_pal();
+      break;
+    case EFFECT_ONE_SIN_5:
+      if (mc) {
         thisdelay = 20;
         allfreq = 6;
         bgclr = 0;
@@ -292,17 +403,25 @@ void strobe_mode(uint8_t mode, bool mc) {                  // mc stands for 'Mod
         thisrot = 0;
         thisspeed = 4;
         wavebright = 255;
-      } one_sin_pal(); break;
-    case 24: if (mc) {
+      }
+      one_sin_pal();
+      break;
+    case EFFECT_PLASMA_2:
+      if (mc) {
         thisdelay = 10;
-      } plasma(23, 15, 6, 7); break;
-    case 25: if (mc) {
+      }
+      plasma(23, 15, 6, 7);
+      break;
+    case EFFECT_CONFETTI_1:
+      if (mc) {
         thisdelay = 20;
         thisinc = 1;
         thisfade = 2;
         thisdiff = 32;
-      } confetti_pal(); break;
-    case 26: if (mc) {
+      }
+      confetti_pal();
+      break;
+    case EFFECT_TWO_SIN_6: if (mc) {
         thisdelay = 10;
         thisspeed = 2;
         thatspeed = 3;
@@ -314,15 +433,19 @@ void strobe_mode(uint8_t mode, bool mc) {                  // mc stands for 'Mod
         thiscutoff = 128;
         thatcutoff = 64;
       } two_sin(); break;
-    case 27: if (mc) {
+    case EFFECT_MATRIX_3:
+      if (mc) {
         thisdelay = 30;
         thisindex = 192;
         thisdir = -1;
         thisrot = 0;
         bgclr = 50;
         bgbri = 0;
-      } matrix_pal(); break;
-    case 28: if (mc) {
+      }
+      matrix_pal();
+      break;
+    case EFFECT_ONE_SIN_6:
+      if (mc) {
         thisdelay = 20;
         allfreq = 20;
         bgclr = 0;
@@ -335,24 +458,36 @@ void strobe_mode(uint8_t mode, bool mc) {                  // mc stands for 'Mod
         thisrot = 0;
         thisspeed = 4;
         wavebright = 255;
-      } one_sin_pal(); break;
-    case 29: if (mc) {
+      }
+      one_sin_pal();
+      break;
+    case EFFECT_CONFETTI_2:
+      if (mc) {
         thisdelay = 20;
         thisinc = 2;
         thisfade = 8;
         thisdiff = 64;
-      } confetti_pal(); break;
-    case 30: if (mc) {
+      }
+      confetti_pal();
+      break;
+    case EFFECT_PLASMA_3:
+      if (mc) {
         thisdelay = 10;
-      } plasma(8, 7, 9, 13); break;
-    case 31: if (mc) {
+      }
+      plasma(8, 7, 9, 13);
+      break;
+    case EFFECT_JUGGLE_2:
+      if (mc) {
         thisdelay = 10;
         numdots = 4;
         thisfade = 32;
         thisbeat = 12;
         thisdiff = 20;
-      } juggle_pal(); break;
-    case 32: if (mc) {
+      }
+      juggle_pal();
+      break;
+    case EFFECT_ONE_SIN_7:
+      if (mc) {
         thisdelay = 30;
         allfreq = 4;
         bgclr = 64;
@@ -365,29 +500,44 @@ void strobe_mode(uint8_t mode, bool mc) {                  // mc stands for 'Mod
         thisrot = 1;
         thisspeed = 8;
         wavebright = 255;
-      } one_sin_pal(); break;
-    case 33: if (mc) {
+      }
+      one_sin_pal();
+      break;
+    case EFFECT_THREE_SIN_3:
+      if (mc) {
         thisdelay = 50;
         mul1 = 3;
         mul2 = 4;
         mul3 = 5;
-      } three_sin_pal(); break;
-    case 34: if (mc) {
+      }
+      three_sin_pal();
+      break;
+    case EFFECT_RAINBOW_MARCH_3:
+      if (mc) {
         thisdelay = 10;
         palchg = 0;
         thisdir = -1;
         thisrot = 1;
         thisdiff = 5;
-      } rainbow_march(); break;
-    case 35: if (mc) {
+      }
+      rainbow_march();
+      break;
+    case EFFECT_PLASMA_4:
+      if (mc) {
         thisdelay = 10;
-      } plasma(11, 17, 20, 23); break;
-    case 36: if (mc) {
+      }
+      plasma(11, 17, 20, 23);
+      break;
+    case EFFECT_CONFETTI_3:
+      if (mc) {
         thisdelay = 20;
         thisinc = 1;
         thisfade = 1;
-      } confetti_pal(); break;
-    case 37: if (mc) {
+      }
+      confetti_pal();
+      break;
+    case EFFECT_NOISE16_2:
+      if (mc) {
         thisdelay = 20;
         palchg = 0;
         octaves = 1;
@@ -398,27 +548,52 @@ void strobe_mode(uint8_t mode, bool mc) {                  // mc stands for 'Mod
         hue_scale = 50;
         hue_speed = 15;
         x_speed = 100;
-      } noise16_pal(); break;
-    case 38: if (mc) {
+      }
+      noise16_pal();
+      break;
+    case EFFECT_NOISE8_3:
+      if (mc) {
         thisdelay = 10;
-      } noise8_pal(); break;
-    case 39: if (mc) {
+      }
+      noise8_pal();
+      break;
+    case EFFECT_FIRE:
+      if (mc) {
         thisdelay = 10;
         palchg = 0;
-      } fire(); break;
-    case 40: if (mc) {
+      }
+      fire();
+      break;
+    case EFFECT_CANDLES:
+      if (mc) {
         thisdelay = 10;
         palchg = 0;
-      } candles(); break;
-    case 41: if (mc) {
+      }
+      candles();
+      break;
+    case EFFECT_COLORWAVES:
+      if (mc) {
         thisdelay = 10;
-      } colorwaves(); break;
-    case 100: if (mc) {
+      }
+      colorwaves();
+      break;
+    case EFFECT_TEST_PALLETE_CHANGE: //Установить цвет
+      if (mc) {
         palchg = 0;
-      } fill_solid(leds, ledCount,  solid); break;    //Установить цвет
-    case 200: fill_solid(leds, MAX_LEDS, CRGB::Black); fill_solid(leds, ledCount, CRGB(255, 255, 255)); break; //Зажеч гирлянду длинной NUM_LEDS (регулировка длинны гирлянды)
-    case 201: fill_solid(leds, MAX_LEDS, CRGB::Black); fill_solid(leds, meshdelay, CRGB(255, 255, 255)); break; //Зажеч гирлянду длинной meshdelay
-    default : ledMode = 0;  break;        //нет такого режима принудительно ставим нулевой
+      }
+      fill_solid(leds, ledCount,  solid);
+      break;
+    case EFFECT_TEST_LED_COUNT: // Зажеч гирлянду длинной NUM_LEDS (регулировка длинны гирлянды)
+      fill_solid(leds, MAX_LEDS, CRGB::Black);
+      fill_solid(leds, ledCount, CRGB(255, 255, 255));
+      break;
+    case EFFECT_TEST_MESH_DELAY: // Зажеч гирлянду длинной meshdelay
+      fill_solid(leds, MAX_LEDS, CRGB::Black);
+      fill_solid(leds, meshdelay, CRGB(255, 255, 255));
+      break; 
+    default: // нет такого режима принудительно ставим нулевой
+      ledMode = EFFECT_BLEND_WAVE;
+      break;
 
   } // switch mode
 #if LOG_ON == 1
