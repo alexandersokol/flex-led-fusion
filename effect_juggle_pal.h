@@ -1,5 +1,5 @@
-#ifndef JUGGLE_PAL_H
-#define JUGGLE_PAL_H
+#ifndef EFFECT_JUGGLE_PAL_H
+#define EFFECT_JUGGLE_PAL_H
 
 /* This is adapted from a routine created by Mark Kriegsman */
 
@@ -26,4 +26,4 @@ void juggle_pal() {                                           // Several colored
   }
 } // juggle_pal()
 
-#endif
+#endif // EFFECT_JUGGLE_PAL_H
