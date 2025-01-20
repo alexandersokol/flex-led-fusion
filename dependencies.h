@@ -23,5 +23,6 @@
 #include "effect_serendipitous_pal.h"
 #include "effect_three_sin_pal.h"
 #include "effect_fire.h"
+#include "effect_candles.h"
 
 #endif // DEPENDENCIES_H
