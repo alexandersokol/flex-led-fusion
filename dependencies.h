@@ -18,5 +18,6 @@
 #include "effect_matrix_pal.h"
 #include "effect_noise8_pal.h"
 #include "effect_noise16_pal.h"
+#include "effect_plasma.h"
 
 #endif // DEPENDENCIES_H

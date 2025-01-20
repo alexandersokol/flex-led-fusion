@@ -1,5 +1,5 @@
-#ifndef NOISE8_PAL_H
-#define NOISE8_PAL_H
+#ifndef EFFECT_NOISE8_PAL_H
+#define EFFECT_NOISE8_PAL_H
 
 #include "effects.h"
 #include "utilities.h"
@@ -25,4 +25,4 @@ void noise8_pal() {
   }                                                                                  // In some sketches, I've used millis() instead of an incremented counter. Works a treat.
 } // noise8_pal()
 
-#endif
+#endif // EFFECT_NOISE8_PAL_H
