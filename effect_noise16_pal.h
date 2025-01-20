@@ -1,9 +1,12 @@
 #ifndef EFFECT_NOISE16_PAL_H
 #define EFFECT_NOISE16_PAL_H
 
+#include "effects.h"
+#include "utilities.h"
+
 // noise16 variables -----------------------------------------------------------------------
 
-uint32_t  x, hue_time;                                        // x & hue_time values
+uint32_t x, hue_time;                                        // x & hue_time values
 uint8_t octaves = 2;     //2                                  // how many octaves to use for the brightness
 uint8_t hue_octaves = 3; //3                                  // how many octaves to use for the hue
 int xscale = 57771;      //57771                              // the 'distance' between points on the x axis
