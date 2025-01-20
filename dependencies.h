@@ -20,5 +20,6 @@
 #include "effect_noise16_pal.h"
 #include "effect_plasma.h"
 #include "effect_rainbow_march.h"
+#include "effect_serendipitous_pal.h"
 
 #endif // DEPENDENCIES_H
