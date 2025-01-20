@@ -13,4 +13,10 @@
   #define RANDOM_LED(...) random16(__VA_ARGS__)
 #endif
 
+#if MAX_LEDS < 255
+  #define BEATSIN_LED(...) beatsin8(__VA_ARGS__)
+#else
+  #define BEATSIN_LED(...) beatsin16(__VA_ARGS__)
+#endif
+
 #endif // UTILITIES_H

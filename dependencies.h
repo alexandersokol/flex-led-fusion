@@ -9,5 +9,6 @@
 #include "utilities.h"
 
 #include "effect_confetti_pal.h"
+#include "effect_blendwave.h"
 
 #endif // DEPENDENCIES_H
