@@ -14,6 +14,7 @@
 
 // Variables
 #define MAX_LEDS 300
+#define PALETTE_TIME 30 // Seconds to change palette
 
 // Modules
 #define IS_LOGS_ON 0
