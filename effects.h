@@ -23,6 +23,10 @@ uint8_t thishue = 0;
 uint8_t thisrot = 1;
 uint8_t thiscutoff = 192;
 uint8_t allfreq = 32;
+uint8_t startindex = 0;
+uint8_t bgclr = 0;
+uint8_t bgbri = 0;
+uint8_t wavebright = 255;
 
 CRGBPalette16 gCurrentPalette;
 
