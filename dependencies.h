@@ -4,7 +4,10 @@
 #include "config.h"
 #include "logging.h"
 #include "ir.h"
+#include "buttons.h"
+#include "effects.h"
+#include "utilities.h"
 
-#include "GyverButton.h"
+#include "effect_confetti_pal.h"
 
 #endif // DEPENDENCIES_H

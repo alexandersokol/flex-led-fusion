@@ -89,4 +89,4 @@
   #define IR_LOOP(...)     // Do nothing
 #endif
 
-#endif // LOGGING_H
+#endif // IR_H
