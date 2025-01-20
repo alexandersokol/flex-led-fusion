@@ -8,7 +8,7 @@
 #error "Requires FastLED 3.1 or later; check github for latest code."
 #endif
 
-UINT_LED ledCount = MAX_LEDS;
+uintl ledCount = MAX_LEDS;
 
 struct CRGB leds[MAX_LEDS];
 
@@ -16,6 +16,13 @@ uint8_t thisdiff = 1;
 uint8_t thisinc = 1;
 uint8_t thisfade = 224;
 uint8_t thisindex = 0;
+int thisphase = 0;
+int8_t thisspeed = 4;
+int8_t thisdir = 1;
+uint8_t thishue = 0;
+uint8_t thisrot = 1;
+uint8_t thiscutoff = 192;
+uint8_t allfreq = 32;
 
 CRGBPalette16 gCurrentPalette;
 

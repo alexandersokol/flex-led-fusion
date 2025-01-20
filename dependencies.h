@@ -11,5 +11,6 @@
 #include "effect_confetti_pal.h"
 #include "effect_blendwave.h"
 #include "effect_rainbow_beat.h"
+#include "effect_two_sin.h"
 
 #endif // DEPENDENCIES_H

@@ -20,7 +20,7 @@
 void confetti_pal() {                                                                                               // random colored speckles that blink in and fade smoothly
   if (ledCount >= 10) {
     fadeToBlackBy(leds, ledCount, thisfade);        //Задухание светодиодов на значение thisfade
-    UINT_LED pos = RANDOM_LED(ledCount);
+    uintl pos = randoml(ledCount);
     leds[pos] = ColorFromPalette(gCurrentPalette, thisindex + random8(thisdiff) / 4 , 255, currentBlending);   // Munge the values and pick a colour from the palette
     thisindex = thisindex + thisinc;                                                                                  // base palette counter increments here.
   }
