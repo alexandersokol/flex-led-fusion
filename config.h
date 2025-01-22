@@ -15,6 +15,10 @@
 // Variables
 #define MAX_LEDS 300
 #define PALETTE_TIME 30 // Seconds to change palette
+#define LED_COLOR_ORDER GRB // LED color order RGB or GRB
+#define LED_CHIPSET WS2812B // LED Chipset
+#define POWER_V 5 // Power adapter Volts
+#define POWER_I 10000 // Power adaptar milliamps
 
 // Modules
 #define IS_LOGS_ON 0

@@ -6,6 +6,7 @@ void setup() {
   Serial.begin(9600);
 
   IR_BEGIN();
+  setupEffects();
 }
 
 void loop() {
@@ -13,12 +14,7 @@ void loop() {
   IR_LOOP();
   BUTTONS_LOOP();
 
-  proceedCommands();
-}
+  effectsLoop();
 
-void proceedCommands() {
-  switch(commandToExecute){
-    case COMMAND_EMPTY:
-      break;
-  }
+  proceedCommands();
 }
