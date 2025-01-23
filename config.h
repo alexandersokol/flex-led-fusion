@@ -20,6 +20,15 @@
 #define POWER_V 5 // Power adapter Volts
 #define POWER_I 10000 // Power adaptar milliamps
 
+#define MIN_BRIGHTNESS 30
+#define MAX_BRIGHTNESS 255
+#define BRIGHTNESS_STEP 5
+
+#define EFFECT_SWITCH_MINUTES 5
+
+#define IS_SPARKS_ENABLED 1
+#define IS_BACKGROUND_ENABLED 1
+
 // Modules
 #define IS_LOGS_ON 0
 #define IS_IR_ON 0

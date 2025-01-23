@@ -156,8 +156,12 @@ const PROGMEM uint8_t modes[] = {
 const uint8_t modesCount = sizeof(modes);
 
 // Save this variable and read from EEPROM on setup
-uint8_t ledBrightness = 255;
+uint8_t ledBrightness = MAX_BRIGHTNESS;
 uint8_t currentModePose = 0;
+bool isLedEnabled = true;
+bool isEffectSwitchEnabled = true;
+bool isSparksEnabled = IS_SPARKS_ENABLED;
+bool isBackgroundEnabled = IS_BACKGROUND_ENABLED;
 
 
 // -------------------------------------------------------------------------------------------
@@ -739,11 +743,11 @@ void setupEffects() {
 } // setup()
 
 // -------------------------------------------------------------------------------------------
-void addGlitter(fract8 chanceOfGlitter) {
-  if (random8() < chanceOfGlitter) {
+void addSparks(fract8 chanceOfSparks) {
+  if (random8() < chanceOfSparks) {
     leds[randoml(ledCount)] += CRGB::White;
   }
-} // addGlitter()
+} // addSparks()
 
 // -------------------------------------------------------------------------------------------
 void addBackground() {
@@ -770,6 +774,33 @@ void proceedCommands() {
       ledMode = pgm_read_byte(modes + currentModePose);
       strobeMode(ledMode, 1);
       break;
+    case COMMAND_BRIGHTNESS_UP:
+      if(ledBrightness <= (MAX_BRIGHTNESS - BRIGHTNESS_STEP)){
+        ledBrightness += BRIGHTNESS_STEP;
+      }
+      LEDS.setBrightness(ledBrightness);
+      break;
+    case COMMAND_BRIGHTNESS_DOWN:
+      if(ledBrightness >= (MIN_BRIGHTNESS + BRIGHTNESS_STEP)){
+        ledBrightness -= BRIGHTNESS_STEP;
+      }
+      LEDS.setBrightness(ledBrightness);
+      break;
+    case COMMAND_TOGGLE_LED_ON:
+      isLedEnabled = !isLedEnabled;
+      if(isLedEnabled){
+        LEDS.setBrightness(ledBrightness);
+      } else {
+        LEDS.setBrightness(0);
+      }
+      break;
+    case COMMAND_TOGGLE_EFFECT_SWITCH_ON:
+      isEffectSwitchEnabled = !isEffectSwitchEnabled;
+      break;
+    case COMMAND_TOGGLE_SPARKS_ON:
+      isSparksEnabled = !isSparksEnabled;
+      isBackgroundEnabled = !isBackgroundEnabled;
+      break;
   }
   pendingCommand = COMMAND_EMPTY;
 }
@@ -779,59 +810,56 @@ void proceedCommands() {
 
 
 
-
-
-#define GLITER_ON 1
-#define BACKGR_ON 1
-
 uint32_t demo_time = 0;
-bool glitter = GLITER_ON;
-bool background = BACKGR_ON;
+
 
 // -------------------------------------------------------------------------------------------
 void effectsLoop()
 {
-    EVERY_N_MILLISECONDS(50)
-    { // Плавный переход от одной палитры в другую
-      uint8_t maxChanges = 24;
-      nblendPaletteTowardPalette(gCurrentPalette, gTargetPalette, maxChanges);
-    }
+  if(!isLedEnabled) {
+    return;
+  }
+
+  EVERY_N_MILLISECONDS(50) { // Smooth pallete change
+    uint8_t maxChanges = 24;
+    nblendPaletteTowardPalette(gCurrentPalette, gTargetPalette, maxChanges);
+  }
 
 #if PALETTE_TIME > 0
-    if (palchg)
-    {
-      EVERY_N_SECONDS(PALETTE_TIME)
-      { // Смена палитры
-        if (palchg == 3)
-        {
-          if (gCurrentPaletteNumber < (gGradientPaletteCount - 1))
-            gCurrentPaletteNumber++;
-          else
-            gCurrentPaletteNumber = 0;
-        }
-        gTargetPalette = gGradientPalettes[gCurrentPaletteNumber]; // We're just ensuring that the gTargetPalette WILL be assigned.
+  if (palchg) {
+    EVERY_N_SECONDS(PALETTE_TIME)
+    { // Смена палитры
+      if (palchg == 3)
+      {
+        if (gCurrentPaletteNumber < (gGradientPaletteCount - 1))
+          gCurrentPaletteNumber++;
+        else
+          gCurrentPaletteNumber = 0;
       }
+      gTargetPalette = gGradientPalettes[gCurrentPaletteNumber]; // We're just ensuring that the gTargetPalette WILL be assigned.
     }
+  }
 #endif
 
-    EVERY_N_MILLIS_I(thistimer, thisdelay)
-    {                                 // Sets the original delay time.
-      thistimer.setPeriod(thisdelay); // This is how you update the delay value on the fly.
-      ledCount = MAX_LEDS;            // Выводим Эффект на все светодиоды
-      strobeMode(ledMode, 0);        // отобразить эффект;
-    }
+  EVERY_N_MILLIS_I(thistimer, thisdelay) { // Sets the original delay time.
+    thistimer.setPeriod(thisdelay); // This is how you update the delay value on the fly.
+    ledCount = MAX_LEDS;            // Выводим Эффект на все светодиоды
+    strobeMode(ledMode, 0);        // отобразить эффект;
+  }
 
-    EVERY_N_SECONDS(360){
+  if(isEffectSwitchEnabled) {
+    EVERY_N_MINUTES(EFFECT_SWITCH_MINUTES) {
       queueCommand(COMMAND_NEXT_EFFECT);
     }
+  }
 
-    if (glitter) {
-      addGlitter(10);
-    }
+  if (isSparksEnabled) {
+    addSparks(10);
+  }
       
-    if (background) {
-      addBackground();
-    }
+  if (isBackgroundEnabled) {
+    addBackground();
+  }
 
   static uint32_t showTimer = 0;
   if (millis() - showTimer >= 10)

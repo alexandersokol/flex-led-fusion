@@ -1,11 +1,11 @@
 #ifndef IR_H
 #define IR_H
 
-#include "config.h"
-#include "logging.h"
-
 #if IS_IR_ON
   #include <IRremote.hpp> 
+  #include "config.h"
+  #include "logging.h"
+  #include "commands.h"
 
   #define DECODE_NEC
   #define IR_CODE_POWER 0x45
@@ -36,33 +36,33 @@
     if (IrReceiver.decode()) {
       IrReceiver.resume();
 
-      if (IrReceiver.decodedIRData.command == 0x0){
+      if (IrReceiver.decodedIRData.command == 0x0) {
         return;
       }
-      if (millis() - lastIRDebunceTime < IR_DEBOUNCE_DELAY){
+      if (millis() - lastIRDebunceTime < IR_DEBOUNCE_DELAY) {
         return;
       }
       lastIRDebunceTime = millis();
 
-      switch(IrReceiver.decodedIRData.command){
+      switch(IrReceiver.decodedIRData.command) {
         case IR_CODE_POWER:
-        // TODO Power pressed
-        break;
+          queueCommand(COMMAND_TOGGLE_LED_ON);
+          break;
         case IR_CODE_TIMER:
-        // TODO Timer pressed
-        break;
+          queueCommand(COMMAND_TOGGLE_EFFECT_SWITCH_ON);
+          break;
         case IR_CODE_CIRCLE_S_PLUS:
-        // TODO Circle S+ pressed
-        break;
+          queueCommand(COMMAND_NEXT_EFFECT);
+          break;
         case IR_CODE_CIRCLE_S_MINUS:
-        // TODO Circle S- pressed
-        break;
+          queueCommand(COMMAND_PREV_EFFECT);
+          break;
         case IR_CODE_CIRCLE_B_PLUS:
-        // TODO Circle B+ pressed
-        break;
+          queueCommand(COMMAND_BRIGHTNESS_UP);
+          break;
         case IR_CODE_CIRCLE_B_MINUS:
-        // TODO Circle B- pressed
-        break;
+          queueCommand(COMMAND_BRIGHTNESS_DOWN);
+          break;
         case IR_CODE_NEBULA:
         // TODO Nebula pressed
         break;
@@ -79,8 +79,8 @@
         // TODO B- pressed
         break;
         case IR_CODE_STAR:
-        // TODO Star pressed
-        break;
+          queueCommand(COMMAND_TOGGLE_SPARKS_ON);
+          break;
       }
     }
   }
