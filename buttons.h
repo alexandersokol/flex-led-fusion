@@ -2,6 +2,7 @@
 #define BUTTONS_H
 
 #include "config.h"
+#include "commands.h"
 #include "logging.h"
 
 #if IS_BUTTONS_ON
@@ -14,7 +15,7 @@
 
   void loopButtonInputs() {
     if(buttonYellow.isSingle()){
-      // TODO Yellow button single click
+      queueCommand(COMMAND_PREV_EFFECT);
     }
     if(buttonYellow.isDouble()){
       // TODO Yellow button double click
@@ -23,7 +24,7 @@
       // TODO Yellow button tripple click
     }
     if(buttonBlue.isSingle()){
-      // TODO Blue button single click
+      queueCommand(COMMAND_NEXT_EFFECT);
     }
     if(buttonBlue.isDouble()){
       // TODO Blue button double click

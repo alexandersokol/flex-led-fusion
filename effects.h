@@ -781,22 +781,6 @@ void proceedCommands() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #define GLITER_ON 1
 #define BACKGR_ON 1
 
@@ -837,7 +821,7 @@ void effectsLoop()
       strobeMode(ledMode, 0);        // отобразить эффект;
     }
 
-    EVERY_N_SECONDS(60){
+    EVERY_N_SECONDS(360){
       queueCommand(COMMAND_NEXT_EFFECT);
     }
 

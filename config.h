@@ -13,7 +13,7 @@
 #define PIN_LED_STRIP 6
 
 // Variables
-#define MAX_LEDS 300
+#define MAX_LEDS 150
 #define PALETTE_TIME 30 // Seconds to change palette
 #define LED_COLOR_ORDER GRB // LED color order RGB or GRB
 #define LED_CHIPSET WS2812B // LED Chipset
@@ -23,7 +23,7 @@
 // Modules
 #define IS_LOGS_ON 0
 #define IS_IR_ON 0
-#define IS_BUTTONS_ON 0
+#define IS_BUTTONS_ON 1
 
 // Commands
 #define COMMAND_EMPTY 0
