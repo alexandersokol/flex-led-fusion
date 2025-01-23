@@ -31,7 +31,7 @@
 
 // Modules
 #define IS_LOGS_ON 0
-#define IS_IR_ON 0
+#define IS_IR_ON 1
 #define IS_BUTTONS_ON 1
 
 // Commands

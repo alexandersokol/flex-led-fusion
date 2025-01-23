@@ -1,6 +1,10 @@
 #ifndef EFFECT_COLORWAVE_H
 #define EFFECT_COLORWAVE_H
 
+#include "effects.h"
+
+// effectThisDirection
+
 // ColorWavesWithPalettes
 // Animated shifting color waves, with several cross-fading color palettes.
 // by Mark Kriegsman, August 2015
@@ -62,7 +66,7 @@ void colorwaves()
       index = scale8( index, 240);
 
       CRGB newcolor = ColorFromPalette(gCurrentPalette, index, bri8);
-      if ( thisdir == 1)        //направление
+      if (effectThisDirection == 1)        //направление
         nblend( leds[(ledCount - 1) - i], newcolor, 128);
       else
         nblend( leds[i], newcolor, 128);

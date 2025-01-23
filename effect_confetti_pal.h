@@ -8,21 +8,21 @@
 
 /*  Usage - confetti_pal();
 
-    thisfade
+    effectThisFade
     thisdelay
     currentPalette and targetPalette
-    thisdiff
-    thisindex
-    thisinc
+    effectThisDiff
+    effectThisIndex
+    effectThisSinc
     thisbright
 */
 
 void confetti_pal() {                                                                                               // random colored speckles that blink in and fade smoothly
   if (ledCount >= 10) {
-    fadeToBlackBy(leds, ledCount, thisfade);        //Задухание светодиодов на значение thisfade
+    fadeToBlackBy(leds, ledCount, effectThisFade);        // Задухание светодиодов на значение thisfade
     uintl pos = randoml(ledCount);
-    leds[pos] = ColorFromPalette(gCurrentPalette, thisindex + random8(thisdiff) / 4 , 255, currentBlending);   // Munge the values and pick a colour from the palette
-    thisindex = thisindex + thisinc;                                                                                  // base palette counter increments here.
+    leds[pos] = ColorFromPalette(gCurrentPalette, effectThisIndex + random8(effectThisDiff) / 4 , 255, currentBlending);   // Munge the values and pick a colour from the palette
+    effectThisIndex = effectThisIndex + effectThisSinc;                                                                                  // base palette counter increments here.
   }
 } // confetti_pal()
 

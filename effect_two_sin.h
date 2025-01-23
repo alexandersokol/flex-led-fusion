@@ -8,6 +8,12 @@
 
    Loads of variables to play with
 
+  effectThisPhase
+  effectThisDirection
+  effectThisHue
+  effectThisRotation
+  effectThisCutOff
+  effectAllFrequency
 */
 
 
@@ -22,19 +28,19 @@ uint8_t thatcutoff = 192;                                     // You can change 
 
 void two_sin() {                                                              // This is the heart of this program. Sure is short.
   if (ledCount >= 10) {
-    thisphase += thisspeed * thisdir;
-    thatphase += thatspeed * thisdir;
+    effectThisPhase += effectThisSpeed * effectThisDirection;
+    thatphase += thatspeed * effectThisDirection;
 
-    thishue = thishue + thisrot;                                                // Hue rotation is fun for thiswave.
+    effectThisHue = effectThisHue + effectThisRotation;                                                // Hue rotation is fun for thiswave.
     thathue = thathue + thatrot;                                                // It's also fun for thatwave.
 
     uintl k;
 
     for (k = 0; k < ledCount; k++) {
-      int thisbright = qsuba(cubicwave8((k * allfreq) + thisphase), thiscutoff); // qsub sets a minimum value called thiscutoff. If < thiscutoff, then bright = 0. Otherwise, bright = 128 (as defined in qsub)..
-      int thatbright = qsuba(cubicwave8((k * allfreq) + 128 + thatphase), thatcutoff); // This wave is 180 degrees out of phase (with the value of 128).
+      int thisbright = qsuba(cubicwave8((k * effectAllFrequency) + effectThisPhase), effectThisCutOff); // qsub sets a minimum value called thiscutoff. If < thiscutoff, then bright = 0. Otherwise, bright = 128 (as defined in qsub)..
+      int thatbright = qsuba(cubicwave8((k * effectAllFrequency) + 128 + thatphase), thatcutoff); // This wave is 180 degrees out of phase (with the value of 128).
 
-      leds[k] = ColorFromPalette(gCurrentPalette, thishue, thisbright, currentBlending);
+      leds[k] = ColorFromPalette(gCurrentPalette, effectThisHue, thisbright, currentBlending);
       leds[k] += ColorFromPalette(gCurrentPalette, thathue, thatbright, currentBlending);
     }
   }

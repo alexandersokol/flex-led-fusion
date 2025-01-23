@@ -7,7 +7,7 @@
 /* This is adapted from a routine created by Mark Kriegsman */
 
 /*  Usage - noise8();
-
+  effectThisDirection
 */
 
 uint16_t dist = 12345;         // A random number for our noise generator.
@@ -21,7 +21,7 @@ void noise8_pal() {
       uint8_t index = inoise8(i * scale, dist + i * scale) % 255;            // Get a value from the noise function. I'm using both x and y axis.
       leds[i] = ColorFromPalette(gCurrentPalette, index, 255, currentBlending);   // With that value, look up the 8 bit colour palette value and assign it to the current LED.
     }
-    dist += beatsin8(10, 1, 4) * thisdir;                                            // Moving along the distance (that random number we started out with). Vary it a bit with a sine wave.
+    dist += beatsin8(10, 1, 4) * effectThisDirection;                                            // Moving along the distance (that random number we started out with). Vary it a bit with a sine wave.
   }                                                                                  // In some sketches, I've used millis() instead of an incremented counter. Works a treat.
 } // noise8_pal()
 

@@ -1,7 +1,10 @@
 #ifndef EFFECT_THREE_SIN_PAL_H
 #define EFFECT_THREE_SIN_PAL_H
 
+#include "effects.h"
+
 // three_sin_pal variables ---------------------------------------------------------------------
+// effectThisDirection
 
 int wave1;
 int wave2;
@@ -13,9 +16,9 @@ uint8_t mul3;
 void three_sin_pal() {
   if (ledCount >= 10) {
 
-    wave1 += beatsin8(10, -4, 4) * thisdir;
-    wave2 += beatsin8(15, -2, 2) * thisdir;
-    wave3 += beatsin8(12, -3, 3) * thisdir;
+    wave1 += beatsin8(10, -4, 4) * effectThisDirection;
+    wave2 += beatsin8(15, -2, 2) * effectThisDirection;
+    wave3 += beatsin8(12, -3, 3) * effectThisDirection;
 
 #if MAX_LEDS < 255
     uint8_t k;

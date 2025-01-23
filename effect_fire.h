@@ -1,6 +1,10 @@
 #ifndef EFFECT_FIRE_H
 #define EFFECT_FIRE_H
 
+#include "effects.h"
+
+// effectThisDirection
+
 void fire() {                                         // The fill_rainbow call doesn't support brightness levels
   if (ledCount >= 10) {
 
@@ -17,7 +21,7 @@ void fire() {                                         // The fill_rainbow call d
     uint16_t k3 = x * 3 + random8(x * 4) + k2; //Пламя
 #endif
 
-    if ( thisdir == 1) {       //направление
+    if ( effectThisDirection == 1) {       //направление
       fill_gradient_RGB(leds, 0,  CRGB::White,  k1,       CRGB::Yellow);            //Градинет
       fill_gradient_RGB(leds, k1, CRGB::Yellow, k2,       CRGB::Red);
       fill_gradient_RGB(leds, k2, CRGB::Red, k3, CRGB::Black);

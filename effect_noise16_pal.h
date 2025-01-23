@@ -5,6 +5,7 @@
 #include "utilities.h"
 
 // noise16 variables -----------------------------------------------------------------------
+// effectThisDirection
 
 uint32_t x, hue_time;                                        // x & hue_time values
 uint8_t octaves = 2;     //2                                  // how many octaves to use for the brightness
@@ -21,9 +22,9 @@ void noise16_pal() {
   if (ledCount >= 10) {
     fill_noise16(leds, ledCount, octaves, x, xscale, hue_octaves, hxy, hue_scale, hue_time);
 
-    hxy += hxyinc * thisdir;
-    x += x_speed * thisdir;
-    hue_time += hue_speed * thisdir;
+    hxy += hxyinc * effectThisDirection;
+    x += x_speed * effectThisDirection;
+    hue_time += hue_speed * effectThisDirection;
   }
 } // noise16_pal()
 

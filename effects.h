@@ -16,24 +16,23 @@ uintl ledCount = MAX_LEDS;
 
 struct CRGB leds[MAX_LEDS];
 
-uint8_t palchg = 3;
-uint8_t thisdiff = 1;
-uint8_t thisinc = 1;
-uint8_t thisfade = 224;
-uint8_t thisindex = 0;
-int thisphase = 0;
-int8_t thisspeed = 4;
-int8_t thisdir = 1;
-uint8_t thishue = 0;
-uint8_t thisrot = 1;
-uint8_t thiscutoff = 192;
-uint8_t allfreq = 32;
-uint8_t startindex = 0;
-uint8_t bgclr = 0;
-uint8_t bgbri = 0;
-uint8_t wavebright = 255;
-uint16_t thisdelay = 0;
-uint8_t thisbeat;
+uint8_t effectPalleteChange = 3;
+uint8_t effectThisDiff = 1;
+uint8_t effectThisSinc = 1;
+uint8_t effectThisFade = 224;
+uint8_t effectThisIndex = 0;
+int effectThisPhase = 0;
+int8_t effectThisSpeed = 4;
+int8_t effectThisDirection = 1;
+uint8_t effectThisHue = 0;
+uint8_t effectThisRotation = 1;
+uint8_t effectThisCutOff = 192;
+uint8_t effectAllFrequency = 32;
+uint8_t effectStartIndex = 0;
+uint8_t effectBackgroundColor = 0;
+uint8_t effectBackgroundBrightness = 0;
+uint16_t effectThisDelay = 0;
+uint8_t effectThisBeat;
 
 CRGBPalette16 gCurrentPalette;
 CRGBPalette16 gTargetPalette;
@@ -43,7 +42,6 @@ TBlendType currentBlending = LINEARBLEND;
 CRGB solid = CRGB::Black;
 
 uint8_t ledMode = 0;
-uint16_t meshdelay;
 
 #include "effect_confetti_pal.h"
 #include "effect_blendwave.h"
@@ -105,10 +103,6 @@ uint16_t meshdelay;
 #define EFFECT_CANDLES 40
 #define EFFECT_COLORWAVES 41
 
-#define EFFECT_TEST_PALLETE_CHANGE 100
-#define EFFECT_TEST_LED_COUNT 200
-#define EFFECT_TEST_MESH_DELAY 201
-
 const PROGMEM uint8_t modes[] = { 
     EFFECT_BLEND_WAVE,
     EFFECT_RAINBOW_BEAT,
@@ -165,179 +159,161 @@ bool isBackgroundEnabled = IS_BACKGROUND_ENABLED;
 
 
 // -------------------------------------------------------------------------------------------
-void strobeMode(uint8_t mode, bool mc)
-{ // mc stands for 'Mode Change', where mc = 0 is strobe the routine, while mc = 1 is change the routine
+void strobeMode(uint8_t mode, bool modeChange) { // mc stands for 'Mode Change', where mc = 0 is strobe the routine, while mc = 1 is change the routine
 
-  if (mc)
-  {
+  if (modeChange) {
     fill_solid(leds, ledCount, CRGB(0, 0, 0)); // Clean up the array for the first time through. Don't show display though, so you may have a smooth transition.
 
 #if PALETTE_TIME > 0
-    if (palchg == 0)
-      palchg = 3;
+    if (effectPalleteChange == 0)
+      effectPalleteChange = 3;
 #else
-    if (palchg == 0)
-      palchg = 1;
+    if (effectPalleteChange == 0)
+      effectPalleteChange = 1;
 #endif
   }
 
-  switch (mode)
-  { // First time through a new mode, so let's initialize the variables for a given display.
+  switch (mode) { // First time through a new mode, so let's initialize the variables for a given display.
   case EFFECT_BLEND_WAVE:
-    if (mc)
-    {
-      thisdelay = 10;
-      palchg = 0;
+    if (modeChange) {
+      effectThisDelay = 10;
+      effectPalleteChange = 0;
     }
     blendwave();
     break;
   case EFFECT_RAINBOW_BEAT:
-    if (mc)
-    {
-      thisdelay = 10;
-      palchg = 0;
+    if (modeChange) {
+      effectThisDelay = 10;
+      effectPalleteChange = 0;
     }
     rainbow_beat();
     break;
   case EFFECT_TWO_SIN_1:
-    if (mc)
-    {
-      thisdelay = 10;
-      allfreq = 2;
-      thisspeed = 1;
+    if (modeChange) {
+      effectThisDelay = 10;
+      effectAllFrequency = 2;
+      effectThisSpeed = 1;
       thatspeed = 2;
-      thishue = 0;
+      effectThisHue = 0;
       thathue = 128;
-      thisdir = 1;
-      thisrot = 1;
+      effectThisDirection = 1;
+      effectThisRotation = 1;
       thatrot = 1;
-      thiscutoff = 128;
+      effectThisCutOff = 128;
       thatcutoff = 192;
     }
     two_sin();
     break;
   case EFFECT_ONE_SIN_1:
-    if (mc)
-    {
-      thisdelay = 20;
-      allfreq = 4;
-      bgclr = 0;
-      bgbri = 0;
-      startindex = 64;
-      thisinc = 2;
-      thiscutoff = 224;
-      thisphase = 0;
-      thiscutoff = 224;
-      thisrot = 0;
-      thisspeed = 4;
-      wavebright = 255;
+    if (modeChange) {
+      effectThisDelay = 20;
+      effectAllFrequency = 4;
+      effectBackgroundColor = 0;
+      effectBackgroundBrightness = 0;
+      effectStartIndex = 64;
+      effectThisSinc = 2;
+      effectThisCutOff = 224;
+      effectThisPhase = 0;
+      effectThisCutOff = 224;
+      effectThisRotation = 0;
+      effectThisSpeed = 4;
     }
     one_sin_pal();
     break;
   case EFFECT_NOISE8_1:
-    if (mc)
-    {
-      thisdelay = 10;
+    if (modeChange) {
+      effectThisDelay = 10;
     }
     noise8_pal();
     break;
   case EFFECT_TWO_SIN_2:
-    if (mc)
-    {
-      thisdelay = 10;
-      allfreq = 4;
-      thisspeed = -1;
+    if (modeChange) {
+      effectThisDelay = 10;
+      effectAllFrequency = 4;
+      effectThisSpeed = -1;
       thatspeed = 0;
-      thishue = 64;
+      effectThisHue = 64;
       thathue = 192;
-      thisdir = 1;
-      thisrot = 0;
+      effectThisDirection = 1;
+      effectThisRotation = 0;
       thatrot = 0;
-      thiscutoff = 64;
+      effectThisCutOff = 64;
       thatcutoff = 192;
     }
     two_sin();
     break;
   case EFFECT_ONE_SIN_2:
-    if (mc)
-    {
-      thisdelay = 20;
-      allfreq = 10;
-      bgclr = 64;
-      bgbri = 4;
-      startindex = 64;
-      thisinc = 2;
-      thiscutoff = 224;
-      thisphase = 0;
-      thiscutoff = 224;
-      thisrot = 0;
-      thisspeed = 4;
-      wavebright = 255;
+    if (modeChange) {
+      effectThisDelay = 20;
+      effectAllFrequency = 10;
+      effectBackgroundColor = 64;
+      effectBackgroundBrightness = 4;
+      effectStartIndex = 64;
+      effectThisSinc = 2;
+      effectThisCutOff = 224;
+      effectThisPhase = 0;
+      effectThisCutOff = 224;
+      effectThisRotation = 0;
+      effectThisSpeed = 4;
     }
     one_sin_pal();
     break;
   case EFFECT_JUGGLE_1:
-    if (mc)
-    {
-      thisdelay = 10;
+    if (modeChange) {
+      effectThisDelay = 10;
       numdots = 2;
-      thisfade = 16;
-      thisbeat = 8;
-      thisdiff = 64;
+      effectThisFade = 16;
+      effectThisBeat = 8;
+      effectThisDiff = 64;
     }
     juggle_pal();
     break;
   case EFFECT_MATRIX_1:
-    if (mc)
-    {
-      thisdelay = 40;
-      thisindex = 128;
-      thisdir = 1;
-      thisrot = 0;
-      bgclr = 200;
-      bgbri = 6;
+    if (modeChange) {
+      effectThisDelay = 40;
+      effectThisIndex = 128;
+      effectThisDirection = 1;
+      effectThisRotation = 0;
+      effectBackgroundColor = 200;
+      effectBackgroundBrightness = 6;
     }
     matrix_pal();
     break;
   case EFFECT_TWO_SIN_3:
-    if (mc)
-    {
-      thisdelay = 10;
-      allfreq = 6;
-      thisspeed = 2;
+    if (modeChange) {
+      effectThisDelay = 10;
+      effectAllFrequency = 6;
+      effectThisSpeed = 2;
       thatspeed = 3;
-      thishue = 96;
+      effectThisHue = 96;
       thathue = 224;
-      thisdir = 1;
-      thisrot = 0;
+      effectThisDirection = 1;
+      effectThisRotation = 0;
       thatrot = 0;
-      thiscutoff = 64;
+      effectThisCutOff = 64;
       thatcutoff = 64;
     }
     two_sin();
     break;
   case EFFECT_ONE_SIN_3:
-    if (mc)
-    {
-      thisdelay = 20;
-      allfreq = 16;
-      bgclr = 0;
-      bgbri = 0;
-      startindex = 64;
-      thisinc = 2;
-      thiscutoff = 224;
-      thisphase = 0;
-      thiscutoff = 224;
-      thisrot = 0;
-      thisspeed = 4;
-      wavebright = 255;
+    if (modeChange) {
+      effectThisDelay = 20;
+      effectAllFrequency = 16;
+      effectBackgroundColor = 0;
+      effectBackgroundBrightness = 0;
+      effectStartIndex = 64;
+      effectThisSinc = 2;
+      effectThisCutOff = 224;
+      effectThisPhase = 0;
+      effectThisCutOff = 224;
+      effectThisRotation = 0;
+      effectThisSpeed = 4;
     }
     one_sin_pal();
     break;
   case EFFECT_THREE_SIN_1:
-    if (mc)
-    {
-      thisdelay = 50;
+    if (modeChange) {
+      effectThisDelay = 50;
       mul1 = 5;
       mul2 = 8;
       mul3 = 7;
@@ -345,105 +321,95 @@ void strobeMode(uint8_t mode, bool mc)
     three_sin_pal();
     break;
   case EFFECT_SERENDIPITOUS:
-    if (mc)
-    {
-      thisdelay = 10;
+    if (modeChange) {
+      effectThisDelay = 10;
     }
     serendipitous_pal();
     break;
   case EFFECT_ONE_SIN_4:
-    if (mc)
-    {
-      thisdelay = 20;
-      allfreq = 8;
-      bgclr = 0;
-      bgbri = 4;
-      startindex = 64;
-      thisinc = 2;
-      thiscutoff = 224;
-      thisphase = 0;
-      thiscutoff = 224;
-      thisrot = 0;
-      thisspeed = 4;
-      wavebright = 255;
+    if (modeChange) {
+      effectThisDelay = 20;
+      effectAllFrequency = 8;
+      effectBackgroundColor = 0;
+      effectBackgroundBrightness = 4;
+      effectStartIndex = 64;
+      effectThisSinc = 2;
+      effectThisCutOff = 224;
+      effectThisPhase = 0;
+      effectThisCutOff = 224;
+      effectThisRotation = 0;
+      effectThisSpeed = 4;
     }
     one_sin_pal();
     break;
   case EFFECT_TWO_SIN_4:
-    if (mc)
-    {
-      thisdelay = 10;
-      allfreq = 20;
-      thisspeed = 2;
+    if (modeChange) {
+      effectThisDelay = 10;
+      effectAllFrequency = 20;
+      effectThisSpeed = 2;
       thatspeed = -1;
-      thishue = 24;
+      effectThisHue = 24;
       thathue = 180;
-      thisdir = 1;
-      thisrot = 0;
+      effectThisDirection = 1;
+      effectThisRotation = 0;
       thatrot = 1;
-      thiscutoff = 64;
+      effectThisCutOff = 64;
       thatcutoff = 128;
     }
     two_sin();
     break;
   case EFFECT_MATRIX_2:
-    if (mc)
-    {
-      thisdelay = 50;
-      thisindex = 64;
-      thisdir = -1;
-      thisrot = 1;
-      bgclr = 100;
-      bgbri = 10;
+    if (modeChange) {
+      effectThisDelay = 50;
+      effectThisIndex = 64;
+      effectThisDirection = -1;
+      effectThisRotation = 1;
+      effectBackgroundColor = 100;
+      effectBackgroundBrightness = 10;
     }
     matrix_pal();
     break;
   case EFFECT_NOISE8_2:
-    if (mc)
-    {
-      thisdelay = 10;
+    if (modeChange) {
+      effectThisDelay = 10;
     }
     noise8_pal();
     break; // By: Andrew Tuline
   case EFFECT_PLASMA_1:
-    if (mc)
-    {
-      thisdelay = 10;
+    if (modeChange) {
+      effectThisDelay = 10;
     }
     plasma(11, 23, 4, 18);
     break;
   case EFFECT_TWO_SIN_5:
-    if (mc)
-    {
-      thisdelay = 20;
-      allfreq = 10;
-      thisspeed = 1;
+    if (modeChange) {
+      effectThisDelay = 20;
+      effectAllFrequency = 10;
+      effectThisSpeed = 1;
       thatspeed = -2;
-      thishue = 48;
+      effectThisHue = 48;
       thathue = 160;
-      thisdir = -1;
-      thisrot = 1;
+      effectThisDirection = -1;
+      effectThisRotation = 1;
       thatrot = -1;
-      thiscutoff = 128;
+      effectThisCutOff = 128;
       thatcutoff = 192;
     }
     two_sin();
     break;
   case EFFECT_RAINBOW_MARCH_1:
-    if (mc)
-    {
-      thisdelay = 50;
-      palchg = 0;
-      thisdir = 1;
-      thisrot = 1;
-      thisdiff = 1;
+    if (modeChange) {
+      effectThisDelay = 50;
+      effectPalleteChange = 0;
+      effectThisDirection = 1;
+      effectThisRotation = 1;
+      effectThisDiff = 1;
     }
     rainbow_march();
     break;
   case EFFECT_THREE_SIN_2:
-    if (mc)
-    {
-      thisdelay = 10;
+    if (modeChange) {
+      effectThisDelay = 10;
       mul1 = 6;
       mul2 = 9;
       mul3 = 11;
@@ -451,21 +417,19 @@ void strobeMode(uint8_t mode, bool mc)
     three_sin_pal();
     break;
   case EFFECT_RAINBOW_MARCH_2:
-    if (mc)
-    {
-      thisdelay = 10;
-      palchg = 0;
-      thisdir = 1;
-      thisrot = 2;
-      thisdiff = 10;
+    if (modeChange) {
+      effectThisDelay = 10;
+      effectPalleteChange = 0;
+      effectThisDirection = 1;
+      effectThisRotation = 2;
+      effectThisDiff = 10;
     }
     rainbow_march();
     break;
   case EFFECT_NOISE16_1:
-    if (mc)
-    {
-      thisdelay = 20;
-      palchg = 0;
+    if (modeChange) {
+      effectThisDelay = 20;
+      effectPalleteChange = 0;
       hxyinc = random16(1, 15);
       octaves = random16(1, 3);
       hue_octaves = random16(1, 5);
@@ -480,136 +444,122 @@ void strobeMode(uint8_t mode, bool mc)
     noise16_pal();
     break;
   case EFFECT_ONE_SIN_5:
-    if (mc)
-    {
-      thisdelay = 20;
-      allfreq = 6;
-      bgclr = 0;
-      bgbri = 0;
-      startindex = 64;
-      thisinc = 2;
-      thiscutoff = 224;
-      thisphase = 0;
-      thiscutoff = 224;
-      thisrot = 0;
-      thisspeed = 4;
-      wavebright = 255;
+    if (modeChange) {
+      effectThisDelay = 20;
+      effectAllFrequency = 6;
+      effectBackgroundColor = 0;
+      effectBackgroundBrightness = 0;
+      effectStartIndex = 64;
+      effectThisSinc = 2;
+      effectThisCutOff = 224;
+      effectThisPhase = 0;
+      effectThisCutOff = 224;
+      effectThisRotation = 0;
+      effectThisSpeed = 4;
     }
     one_sin_pal();
     break;
   case EFFECT_PLASMA_2:
-    if (mc)
-    {
-      thisdelay = 10;
+    if (modeChange) {
+      effectThisDelay = 10;
     }
     plasma(23, 15, 6, 7);
     break;
   case EFFECT_CONFETTI_1:
-    if (mc)
-    {
-      thisdelay = 20;
-      thisinc = 1;
-      thisfade = 2;
-      thisdiff = 32;
+    if (modeChange) {
+      effectThisDelay = 20;
+      effectThisSinc = 1;
+      effectThisFade = 2;
+      effectThisDiff = 32;
     }
     confetti_pal();
     break;
   case EFFECT_TWO_SIN_6:
-    if (mc)
-    {
-      thisdelay = 10;
-      thisspeed = 2;
+    if (modeChange) {
+      effectThisDelay = 10;
+      effectThisSpeed = 2;
       thatspeed = 3;
-      thishue = 96;
+      effectThisHue = 96;
       thathue = 224;
-      thisdir = 1;
-      thisrot = 1;
+      effectThisDirection = 1;
+      effectThisRotation = 1;
       thatrot = 2;
-      thiscutoff = 128;
+      effectThisCutOff = 128;
       thatcutoff = 64;
     }
     two_sin();
     break;
   case EFFECT_MATRIX_3:
-    if (mc)
-    {
-      thisdelay = 30;
-      thisindex = 192;
-      thisdir = -1;
-      thisrot = 0;
-      bgclr = 50;
-      bgbri = 0;
+    if (modeChange) {
+      effectThisDelay = 30;
+      effectThisIndex = 192;
+      effectThisDirection = -1;
+      effectThisRotation = 0;
+      effectBackgroundColor = 50;
+      effectBackgroundBrightness = 0;
     }
     matrix_pal();
     break;
   case EFFECT_ONE_SIN_6:
-    if (mc)
-    {
-      thisdelay = 20;
-      allfreq = 20;
-      bgclr = 0;
-      bgbri = 0;
-      startindex = 64;
-      thisinc = 2;
-      thiscutoff = 224;
-      thisphase = 0;
-      thiscutoff = 224;
-      thisrot = 0;
-      thisspeed = 4;
-      wavebright = 255;
+    if (modeChange) {
+      effectThisDelay = 20;
+      effectAllFrequency = 20;
+      effectBackgroundColor = 0;
+      effectBackgroundBrightness = 0;
+      effectStartIndex = 64;
+      effectThisSinc = 2;
+      effectThisCutOff = 224;
+      effectThisPhase = 0;
+      effectThisCutOff = 224;
+      effectThisRotation = 0;
+      effectThisSpeed = 4;
     }
     one_sin_pal();
     break;
   case EFFECT_CONFETTI_2:
-    if (mc)
-    {
-      thisdelay = 20;
-      thisinc = 2;
-      thisfade = 8;
-      thisdiff = 64;
+    if (modeChange) {
+      effectThisDelay = 20;
+      effectThisSinc = 2;
+      effectThisFade = 8;
+      effectThisDiff = 64;
     }
     confetti_pal();
     break;
   case EFFECT_PLASMA_3:
-    if (mc)
-    {
-      thisdelay = 10;
+    if (modeChange) {
+      effectThisDelay = 10;
     }
     plasma(8, 7, 9, 13);
     break;
   case EFFECT_JUGGLE_2:
-    if (mc)
-    {
-      thisdelay = 10;
+    if (modeChange) {
+      effectThisDelay = 10;
       numdots = 4;
-      thisfade = 32;
-      thisbeat = 12;
-      thisdiff = 20;
+      effectThisFade = 32;
+      effectThisBeat = 12;
+      effectThisDiff = 20;
     }
     juggle_pal();
     break;
   case EFFECT_ONE_SIN_7:
-    if (mc)
-    {
-      thisdelay = 30;
-      allfreq = 4;
-      bgclr = 64;
-      bgbri = 4;
-      startindex = 64;
-      thisinc = 2;
-      thiscutoff = 224;
-      thisphase = 0;
-      thiscutoff = 128;
-      thisrot = 1;
-      thisspeed = 8;
-      wavebright = 255;
+    if (modeChange) {
+      effectThisDelay = 30;
+      effectAllFrequency = 4;
+      effectBackgroundColor = 64;
+      effectBackgroundBrightness = 4;
+      effectStartIndex = 64;
+      effectThisSinc = 2;
+      effectThisCutOff = 224;
+      effectThisPhase = 0;
+      effectThisCutOff = 128;
+      effectThisRotation = 1;
+      effectThisSpeed = 8;
     }
     one_sin_pal();
     break;
   case EFFECT_THREE_SIN_3:
-    if (mc)
-    {
-      thisdelay = 50;
+    if (modeChange) {
+      effectThisDelay = 50;
       mul1 = 3;
       mul2 = 4;
       mul3 = 5;
@@ -617,37 +567,33 @@ void strobeMode(uint8_t mode, bool mc)
     three_sin_pal();
     break;
   case EFFECT_RAINBOW_MARCH_3:
-    if (mc)
-    {
-      thisdelay = 10;
-      palchg = 0;
-      thisdir = -1;
-      thisrot = 1;
-      thisdiff = 5;
+    if (modeChange) {
+      effectThisDelay = 10;
+      effectPalleteChange = 0;
+      effectThisDirection = -1;
+      effectThisRotation = 1;
+      effectThisDiff = 5;
     }
     rainbow_march();
     break;
   case EFFECT_PLASMA_4:
-    if (mc)
-    {
-      thisdelay = 10;
+    if (modeChange) {
+      effectThisDelay = 10;
     }
     plasma(11, 17, 20, 23);
     break;
   case EFFECT_CONFETTI_3:
-    if (mc)
-    {
-      thisdelay = 20;
-      thisinc = 1;
-      thisfade = 1;
+    if (modeChange) {
+      effectThisDelay = 20;
+      effectThisSinc = 1;
+      effectThisFade = 1;
     }
     confetti_pal();
     break;
   case EFFECT_NOISE16_2:
-    if (mc)
-    {
-      thisdelay = 20;
-      palchg = 0;
+    if (modeChange) {
+      effectThisDelay = 20;
+      effectPalleteChange = 0;
       octaves = 1;
       hue_octaves = 2;
       hxy = 6000;
@@ -660,63 +606,44 @@ void strobeMode(uint8_t mode, bool mc)
     noise16_pal();
     break;
   case EFFECT_NOISE8_3:
-    if (mc)
-    {
-      thisdelay = 10;
+    if (modeChange) {
+      effectThisDelay = 10;
     }
     noise8_pal();
     break;
   case EFFECT_FIRE:
-    if (mc)
-    {
-      thisdelay = 10;
-      palchg = 0;
+    if (modeChange) {
+      effectThisDelay = 10;
+      effectPalleteChange = 0;
     }
     fire();
     break;
   case EFFECT_CANDLES:
-    if (mc)
-    {
-      thisdelay = 10;
-      palchg = 0;
+    if (modeChange) {
+      effectThisDelay = 10;
+      effectPalleteChange = 0;
     }
     candles();
     break;
   case EFFECT_COLORWAVES:
-    if (mc)
-    {
-      thisdelay = 10;
+    if (modeChange) {
+      effectThisDelay = 10;
     }
     colorwaves();
     break;
-  case EFFECT_TEST_PALLETE_CHANGE: // Установить цвет
-    if (mc)
-    {
-      palchg = 0;
-    }
-    fill_solid(leds, ledCount, solid);
-    break;
-  case EFFECT_TEST_LED_COUNT: // Зажеч гирлянду длинной MAX_LEDS (регулировка длинны гирлянды)
-    fill_solid(leds, MAX_LEDS, CRGB::Black);
-    fill_solid(leds, ledCount, CRGB(255, 255, 255));
-    break;
-  case EFFECT_TEST_MESH_DELAY: // Зажеч гирлянду длинной meshdelay
-    fill_solid(leds, MAX_LEDS, CRGB::Black);
-    fill_solid(leds, meshdelay, CRGB(255, 255, 255));
-    break;
-  default: // нет такого режима принудительно ставим нулевой
+  default:
     ledMode = EFFECT_BLEND_WAVE;
     break;
 
   } // switch mode
 
-  if (mc)
+  if (modeChange)
   {
-    if (palchg == 0)
+    if (effectPalleteChange == 0)
       LOG_PRINTLN("Change palette off");
-    else if (palchg == 1)
+    else if (effectPalleteChange == 1)
       LOG_PRINTLN("Change palette Stop");
-    else if (palchg == 3)
+    else if (effectPalleteChange == 3)
       LOG_PRINTLN("Change palette ON");
   }
 } // strobeMode()
@@ -735,7 +662,6 @@ void setupEffects() {
 
   ledMode = pgm_read_byte(modes + currentModePose);
   ledCount = MAX_LEDS;
-  meshdelay = 0;
 
   gCurrentPalette = gGradientPalettes[0];
   gTargetPalette = gGradientPalettes[0];
@@ -805,14 +731,6 @@ void proceedCommands() {
   pendingCommand = COMMAND_EMPTY;
 }
 
-
-
-
-
-
-uint32_t demo_time = 0;
-
-
 // -------------------------------------------------------------------------------------------
 void effectsLoop()
 {
@@ -826,10 +744,10 @@ void effectsLoop()
   }
 
 #if PALETTE_TIME > 0
-  if (palchg) {
+  if (effectPalleteChange) {
     EVERY_N_SECONDS(PALETTE_TIME)
     { // Смена палитры
-      if (palchg == 3)
+      if (effectPalleteChange == 3)
       {
         if (gCurrentPaletteNumber < (gGradientPaletteCount - 1))
           gCurrentPaletteNumber++;
@@ -841,8 +759,8 @@ void effectsLoop()
   }
 #endif
 
-  EVERY_N_MILLIS_I(thistimer, thisdelay) { // Sets the original delay time.
-    thistimer.setPeriod(thisdelay); // This is how you update the delay value on the fly.
+  EVERY_N_MILLIS_I(thistimer, effectThisDelay) { // Sets the original delay time.
+    thistimer.setPeriod(effectThisDelay); // This is how you update the delay value on the fly.
     ledCount = MAX_LEDS;            // Выводим Эффект на все светодиоды
     strobeMode(ledMode, 0);        // отобразить эффект;
   }
