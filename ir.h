@@ -21,18 +21,22 @@
   #define IR_CODE_B_MINUS 0x7
   #define IR_CODE_STAR 0xFF
 
-  #define IR_DEBOUNCE_DELAY 100
+  #define IR_DEBOUNCE_DELAY 80
 
   #define IR_BEGIN(...) irBegin()
   #define IR_LOOP(...) irLoop()
 
   unsigned long lastIRDebunceTime = 0;
+  uint16_t lastCommandReceived = 0x0;
 
   void irBegin() {
     IrReceiver.begin(PIN_IR_RECEIVE, true);
+    IrReceiver.enableIRIn();
   }
 
   void irLoop() {
+    while (!IrReceiver.isIdle());
+
     if (IrReceiver.decode()) {
       IrReceiver.resume();
 
@@ -40,15 +44,16 @@
         return;
       }
 
-      if (millis() - lastIRDebunceTime < IR_DEBOUNCE_DELAY) {
-        return;
-      }
-      lastIRDebunceTime = millis();
-
       LOG_PRINT("IR command received: 0x");
       LOG_PRINTLN(IrReceiver.decodedIRData.command, HEX);
 
-      switch(IrReceiver.decodedIRData.command) {
+      if (millis() - lastIRDebunceTime < IR_DEBOUNCE_DELAY && lastCommandReceived == IrReceiver.decodedIRData.command) {
+        return;
+      }
+      lastCommandReceived = IrReceiver.decodedIRData.command;
+      lastIRDebunceTime = millis();
+
+      switch(lastCommandReceived) {
         case IR_CODE_POWER:
           queueCommand(COMMAND_TOGGLE_LED_ON);
           break;
