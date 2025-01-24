@@ -29,7 +29,7 @@
   unsigned long lastIRDebunceTime = 0;
 
   void irBegin() {
-    IrReceiver.begin(PIN_IR_RECEIVE, false);
+    IrReceiver.begin(PIN_IR_RECEIVE, true);
   }
 
   void irLoop() {
@@ -39,10 +39,14 @@
       if (IrReceiver.decodedIRData.command == 0x0) {
         return;
       }
+
       if (millis() - lastIRDebunceTime < IR_DEBOUNCE_DELAY) {
         return;
       }
       lastIRDebunceTime = millis();
+
+      LOG_PRINT("IR command received: 0x");
+      LOG_PRINTLN(IrReceiver.decodedIRData.command, HEX);
 
       switch(IrReceiver.decodedIRData.command) {
         case IR_CODE_POWER:
@@ -64,7 +68,7 @@
           queueCommand(COMMAND_BRIGHTNESS_DOWN);
           break;
         case IR_CODE_NEBULA:
-        // TODO Nebula pressed
+          queueCommand(COMMAND_NEXT_GENERIC_MODE);
         break;
         case IR_CODE_S_PLUS:
         // TODO S+ pressed

@@ -18,7 +18,7 @@
       queueCommand(COMMAND_PREV_EFFECT);
     }
     if(buttonYellow.isDouble()){
-      // TODO Yellow button double click
+      queueCommand(COMMAND_BRIGHTNESS_DOWN);
     }
     if(buttonYellow.isTriple()){
       // TODO Yellow button tripple click
@@ -27,10 +27,10 @@
       queueCommand(COMMAND_NEXT_EFFECT);
     }
     if(buttonBlue.isDouble()){
-      // TODO Blue button double click
+      queueCommand(COMMAND_BRIGHTNESS_UP);
     }
     if(buttonBlue.isTriple()){
-      // TODO Blue button tripple click
+      queueCommand(COMMAND_NEXT_GENERIC_MODE);
     }
   }
 

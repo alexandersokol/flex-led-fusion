@@ -22,7 +22,7 @@
 
 #define MIN_BRIGHTNESS 30
 #define MAX_BRIGHTNESS 255
-#define BRIGHTNESS_STEP 5
+#define BRIGHTNESS_STEP 20
 
 #define EFFECT_SWITCH_MINUTES 5
 
@@ -30,7 +30,7 @@
 #define IS_BACKGROUND_ENABLED 1
 
 // Modules
-#define IS_LOGS_ON 0
+#define IS_LOGS_ON 1
 #define IS_IR_ON 1
 #define IS_BUTTONS_ON 1
 

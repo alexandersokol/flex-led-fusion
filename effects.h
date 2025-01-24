@@ -12,6 +12,11 @@
 #error "Requires FastLED 3.1 or later; check github for latest code."
 #endif
 
+#define GENERIC_MODE_NOTAMESH 0
+#define GENERIC_MODE_COLORS 1
+
+const uint32_t genericModes[] = { GENERIC_MODE_NOTAMESH, GENERIC_MODE_COLORS };
+
 uintl ledCount = MAX_LEDS;
 
 struct CRGB leds[MAX_LEDS];
@@ -149,6 +154,157 @@ const PROGMEM uint8_t modes[] = {
  };
 const uint8_t modesCount = sizeof(modes);
 
+const PROGMEM uint32_t colorModes[] = { 
+  CRGB::AliceBlue,
+  CRGB::Amethyst,
+  CRGB::AntiqueWhite,
+  CRGB::Aqua,
+  CRGB::Aquamarine,
+  CRGB::Azure,
+  CRGB::Beige,
+  CRGB::Bisque,
+  CRGB::BlanchedAlmond,
+  CRGB::Blue,
+  CRGB::BlueViolet,
+  CRGB::Brown,
+  CRGB::BurlyWood,
+  CRGB::CadetBlue,
+  CRGB::Chartreuse,
+  CRGB::Chocolate,
+  CRGB::Coral,
+  CRGB::CornflowerBlue,
+  CRGB::Cornsilk,
+  CRGB::Crimson,
+  CRGB::Cyan,
+  CRGB::DarkBlue,
+  CRGB::DarkCyan,
+  CRGB::DarkGoldenrod,
+  CRGB::DarkGray,
+  CRGB::DarkGrey,
+  CRGB::DarkGreen,
+  CRGB::DarkKhaki,
+  CRGB::DarkMagenta,
+  CRGB::DarkOliveGreen,
+  CRGB::DarkOrange,
+  CRGB::DarkOrchid,
+  CRGB::DarkRed,
+  CRGB::DarkSalmon,
+  CRGB::DarkSeaGreen,
+  CRGB::DarkSlateBlue,
+  CRGB::DarkSlateGray,
+  CRGB::DarkSlateGrey,
+  CRGB::DarkTurquoise,
+  CRGB::DarkViolet,
+  CRGB::DeepPink,
+  CRGB::DeepSkyBlue,
+  CRGB::DimGray,
+  CRGB::DodgerBlue,
+  CRGB::FireBrick,
+  CRGB::FloralWhite,
+  CRGB::ForestGreen,
+  CRGB::Fuchsia,
+  CRGB::Gainsboro,
+  CRGB::GhostWhite,
+  CRGB::Gold,
+  CRGB::Goldenrod,
+  CRGB::Gray,
+  CRGB::Grey,
+  CRGB::Green,
+  CRGB::GreenYellow,
+  CRGB::Honeydew,
+  CRGB::HotPink,
+  CRGB::IndianRed,
+  CRGB::Indigo,
+  CRGB::Ivory,
+  CRGB::Khaki,
+  CRGB::Lavender,
+  CRGB::LavenderBlush,
+  CRGB::LawnGreen,
+  CRGB::LemonChiffon,
+  CRGB::LightBlue,
+  CRGB::LightCoral,
+  CRGB::LightCyan,
+  CRGB::LightGoldenrodYellow,
+  CRGB::LightGreen,
+  CRGB::LightGrey,
+  CRGB::LightPink,
+  CRGB::LightSalmon,
+  CRGB::LightSeaGreen,
+  CRGB::LightSkyBlue,
+  CRGB::LightSlateGray,
+  CRGB::LightSlateGrey,
+  CRGB::LightSteelBlue,
+  CRGB::LightYellow,
+  CRGB::Lime,
+  CRGB::LimeGreen,
+  CRGB::Linen,
+  CRGB::Magenta,
+  CRGB::Maroon,
+  CRGB::MediumAquamarine,
+  CRGB::MediumBlue,
+  CRGB::MediumOrchid,
+  CRGB::MediumPurple,
+  CRGB::MediumSeaGreen,
+  CRGB::MediumSlateBlue,
+  CRGB::MediumSpringGreen,
+  CRGB::MediumTurquoise,
+  CRGB::MediumVioletRed,
+  CRGB::MidnightBlue,
+  CRGB::MintCream,
+  CRGB::MistyRose,
+  CRGB::Moccasin,
+  CRGB::NavajoWhite,
+  CRGB::Navy,
+  CRGB::OldLace,
+  CRGB::Olive,
+  CRGB::OliveDrab,
+  CRGB::Orange,
+  CRGB::OrangeRed,
+  CRGB::Orchid,
+  CRGB::PaleGoldenrod,
+  CRGB::PaleGreen,
+  CRGB::PaleTurquoise,
+  CRGB::PaleVioletRed,
+  CRGB::PapayaWhip,
+  CRGB::PeachPuff,
+  CRGB::Peru,
+  CRGB::Pink,
+  CRGB::Plaid,
+  CRGB::Plum,
+  CRGB::PowderBlue,
+  CRGB::Purple,
+  CRGB::Red,
+  CRGB::RosyBrown,
+  CRGB::RoyalBlue,
+  CRGB::SaddleBrown,
+  CRGB::Salmon,
+  CRGB::SandyBrown,
+  CRGB::SeaGreen,
+  CRGB::Seashell,
+  CRGB::Sienna,
+  CRGB::Silver,
+  CRGB::SkyBlue,
+  CRGB::SlateBlue,
+  CRGB::SlateGray,
+  CRGB::SlateGrey,
+  CRGB::Snow,
+  CRGB::SpringGreen,
+  CRGB::SteelBlue,
+  CRGB::Tan,
+  CRGB::Teal,
+  CRGB::Thistle,
+  CRGB::Tomato,
+  CRGB::Turquoise,
+  CRGB::Violet,
+  CRGB::Wheat,
+  CRGB::White,
+  CRGB::WhiteSmoke,
+  CRGB::Yellow,
+  CRGB::YellowGreen,
+  CRGB::FairyLight
+};
+const uint8_t colorModesCount = sizeof(colorModes);
+
 // Save this variable and read from EEPROM on setup
 uint8_t ledBrightness = MAX_BRIGHTNESS;
 uint8_t currentModePose = 0;
@@ -156,6 +312,9 @@ bool isLedEnabled = true;
 bool isEffectSwitchEnabled = true;
 bool isSparksEnabled = IS_SPARKS_ENABLED;
 bool isBackgroundEnabled = IS_BACKGROUND_ENABLED;
+
+uint8_t genericModePosition = GENERIC_MODE_NOTAMESH;
+uint8_t colorModePosition = 0;
 
 
 // -------------------------------------------------------------------------------------------
@@ -677,8 +836,7 @@ void addSparks(fract8 chanceOfSparks) {
 
 // -------------------------------------------------------------------------------------------
 void addBackground() {
-  uintl i;
-  for (i = 0; i < ledCount; i++)
+  for (uintl i = 0; i < ledCount; i++)
     if ((leds[i].r < 5) &&
         (leds[i].g < 5) &&
         (leds[i].b < 5))
@@ -690,15 +848,23 @@ void proceedCommands() {
   switch(pendingCommand){
     case COMMAND_EMPTY: // No commands to execute
       break;
-    case COMMAND_NEXT_EFFECT: // Switch to next effect
-      if (++currentModePose >= (modesCount - 1)) currentModePose = 0;
-      ledMode = pgm_read_byte(modes + currentModePose);
-      strobeMode(ledMode, 1);
+    case COMMAND_NEXT_EFFECT: // Switch to next effect or color
+      if(genericModes[genericModePosition] == GENERIC_MODE_NOTAMESH) {
+        if (++currentModePose >= (modesCount - 1)) currentModePose = 0;
+        ledMode = pgm_read_byte(modes + currentModePose);
+        strobeMode(ledMode, 1);
+      } else if(genericModes[genericModePosition] == GENERIC_MODE_COLORS){
+        if (++colorModePosition >= colorModesCount) colorModePosition = 0;
+      }
       break;
-    case COMMAND_PREV_EFFECT: // Switch to previous effect
-      if (--currentModePose < (0)) modesCount - 1;
-      ledMode = pgm_read_byte(modes + currentModePose);
-      strobeMode(ledMode, 1);
+    case COMMAND_PREV_EFFECT: // Switch to previous effect or color
+      if(genericModes[genericModePosition] == GENERIC_MODE_NOTAMESH) {
+        if (--currentModePose < 0) currentModePose = modesCount - 1;
+        ledMode = pgm_read_byte(modes + currentModePose);
+        strobeMode(ledMode, 1);
+      } else if(genericModes[genericModePosition] == GENERIC_MODE_COLORS){
+        if (--colorModePosition < 0) colorModePosition = colorModesCount - 1;
+      }
       break;
     case COMMAND_BRIGHTNESS_UP:
       if(ledBrightness <= (MAX_BRIGHTNESS - BRIGHTNESS_STEP)){
@@ -727,17 +893,16 @@ void proceedCommands() {
       isSparksEnabled = !isSparksEnabled;
       isBackgroundEnabled = !isBackgroundEnabled;
       break;
+    case COMMAND_NEXT_GENERIC_MODE:
+      if (++genericModePosition >= (sizeof(genericModes) - 1)) genericModePosition = 0;
+      break;
   }
   pendingCommand = COMMAND_EMPTY;
 }
 
 // -------------------------------------------------------------------------------------------
-void effectsLoop()
+void notameshLoop()
 {
-  if(!isLedEnabled) {
-    return;
-  }
-
   EVERY_N_MILLISECONDS(50) { // Smooth pallete change
     uint8_t maxChanges = 24;
     nblendPaletteTowardPalette(gCurrentPalette, gTargetPalette, maxChanges);
@@ -780,12 +945,45 @@ void effectsLoop()
   }
 
   static uint32_t showTimer = 0;
-  if (millis() - showTimer >= 10)
-  {
+  if (millis() - showTimer >= 10) {
     showTimer = millis();
     FastLED.show();
   }
 } // loop()
+
+// -------------------------------------------------------------------------------------------
+void colorsLoop(){
+  if (isSparksEnabled) {
+    addSparks(10);
+  }
+
+  for (uintl i = 0; i < ledCount; i++) {
+    leds[i] = pgm_read_dword(&colorModes[colorModePosition]);
+  }
+
+  static uint32_t showTimer = 0;
+  if (millis() - showTimer >= 10) {
+    showTimer = millis();
+    FastLED.show();
+  }
+}
+
+// -------------------------------------------------------------------------------------------
+void effectsLoop(){
+  if(!isLedEnabled) {
+    return;
+  }
+
+  switch(genericModes[genericModePosition]) {
+    case GENERIC_MODE_NOTAMESH:
+      notameshLoop();
+      break;
+    case GENERIC_MODE_COLORS:
+      colorsLoop();
+      break;
+  }
+
+}
 
 
 #endif // EFFECTS_H

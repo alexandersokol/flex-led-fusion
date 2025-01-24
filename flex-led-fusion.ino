@@ -10,11 +10,10 @@ void setup() {
 }
 
 void loop() {
-  
   IR_LOOP();
+
   BUTTONS_LOOP();
 
   effectsLoop();
-
   proceedCommands();
 }
