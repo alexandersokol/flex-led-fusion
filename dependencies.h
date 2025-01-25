@@ -7,5 +7,6 @@
 #include "buttons.h"
 #include "effects.h"
 #include "utilities.h"
+#include "single_led.h"
 
 #endif // DEPENDENCIES_H

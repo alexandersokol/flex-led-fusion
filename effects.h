@@ -2,6 +2,7 @@
 #define EFFECTS_H
 
 #include "FastLED.h"
+#include <EEPROM.h>
 #include "utilities.h"
 #include "gradient_palettes.h"
 #include "logging.h"
@@ -305,7 +306,19 @@ const PROGMEM uint32_t colorModes[] = {
 };
 const uint8_t colorModesCount = sizeof(colorModes);
 
-// Save this variable and read from EEPROM on setup
+// EEPROM addresses for each variable
+#define MAGIC_VALUE_ADDR 0
+#define LED_BRIGHTNESS_ADDR 1
+#define CURRENT_MODE_ADDR 2
+#define IS_LED_ENABLED_ADDR 3
+#define IS_EFFECT_SWITCH_ADDR 4
+#define IS_SPARKS_ENABLED_ADDR 5
+#define IS_BACKGROUND_ENABLED_ADDR 6
+#define GENERIC_MODE_ADDR 7
+#define COLOR_MODE_ADDR 8
+
+#define MAGIC_VALUE 0x42  // A unique value to verify initialization
+
 uint8_t ledBrightness = MAX_BRIGHTNESS;
 uint8_t currentModePose = 0;
 bool isLedEnabled = true;
@@ -316,6 +329,39 @@ bool isBackgroundEnabled = IS_BACKGROUND_ENABLED;
 uint8_t genericModePosition = GENERIC_MODE_NOTAMESH;
 uint8_t colorModePosition = 0;
 
+// -------------------------------------------------------------------------------------------
+void saveToEEPROM() {
+  EEPROM.update(MAGIC_VALUE_ADDR, MAGIC_VALUE);  // Write magic value
+  EEPROM.update(LED_BRIGHTNESS_ADDR, ledBrightness);
+  EEPROM.update(CURRENT_MODE_ADDR, currentModePose);
+  EEPROM.update(IS_LED_ENABLED_ADDR, isLedEnabled);
+  EEPROM.update(IS_EFFECT_SWITCH_ADDR, isEffectSwitchEnabled);
+  EEPROM.update(IS_SPARKS_ENABLED_ADDR, isSparksEnabled);
+  EEPROM.update(IS_BACKGROUND_ENABLED_ADDR, isBackgroundEnabled);
+  EEPROM.update(GENERIC_MODE_ADDR, genericModePosition);
+  EEPROM.update(COLOR_MODE_ADDR, colorModePosition);
+  LOG_PRINTLN("Values saved to EEPROM");
+}
+
+// -------------------------------------------------------------------------------------------
+void loadFromEEPROM() {
+  if (EEPROM.read(MAGIC_VALUE_ADDR) != MAGIC_VALUE) {
+    // EEPROM uninitialized, write defaults
+    LOG_PRINTLN("EEPROM uninitialized, using defaults...");
+  } else {
+    // Load values from EEPROM
+    ledBrightness = EEPROM.read(LED_BRIGHTNESS_ADDR);
+    currentModePose = EEPROM.read(CURRENT_MODE_ADDR);
+    isLedEnabled = EEPROM.read(IS_LED_ENABLED_ADDR);
+    isEffectSwitchEnabled = EEPROM.read(IS_EFFECT_SWITCH_ADDR);
+    isSparksEnabled = EEPROM.read(IS_SPARKS_ENABLED_ADDR);
+    isBackgroundEnabled = EEPROM.read(IS_BACKGROUND_ENABLED_ADDR);
+    genericModePosition = EEPROM.read(GENERIC_MODE_ADDR);
+    colorModePosition = EEPROM.read(COLOR_MODE_ADDR);
+
+    LOG_PRINTLN("Loaded values from EEPROM");
+  }
+}
 
 // -------------------------------------------------------------------------------------------
 void strobeMode(uint8_t mode, bool modeChange) { // mc stands for 'Mode Change', where mc = 0 is strobe the routine, while mc = 1 is change the routine
@@ -811,6 +857,9 @@ void strobeMode(uint8_t mode, bool modeChange) { // mc stands for 'Mode Change',
 // -------------------------------------------------------------------------------------------
 void setupEffects() {
   delay(1000); // Slow startup so we can re-upload in the case of errors.
+
+  loadFromEEPROM();
+
   LEDS.setBrightness(ledBrightness); // Set the generic maximum brightness value.
   LEDS.addLeds<LED_CHIPSET, PIN_LED_STRIP, LED_COLOR_ORDER>(leds, MAX_LEDS);
 
@@ -897,7 +946,10 @@ void proceedCommands() {
       if (++genericModePosition >= (sizeof(genericModes) - 1)) genericModePosition = 0;
       break;
   }
-  pendingCommand = COMMAND_EMPTY;
+  if(pendingCommand != COMMAND_EMPTY) {
+    saveToEEPROM();
+    pendingCommand = COMMAND_EMPTY;
+  }
 }
 
 // -------------------------------------------------------------------------------------------

@@ -7,6 +7,7 @@ void setup() {
 
   IR_BEGIN();
   setupEffects();
+  setupSingleLed();
 }
 
 void loop() {
@@ -16,4 +17,5 @@ void loop() {
 
   effectsLoop();
   proceedCommands();
+  loopSingleLed();
 }
