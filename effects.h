@@ -8,6 +8,7 @@
 #include "logging.h"
 #include "config.h"
 #include "commands.h"
+#include "single_led.h"
 
 #if FASTLED_VERSION < 3001000
 #error "Requires FastLED 3.1 or later; check github for latest code."
@@ -310,7 +311,6 @@ const uint8_t colorModesCount = sizeof(colorModes);
 #define MAGIC_VALUE_ADDR 0
 #define LED_BRIGHTNESS_ADDR 1
 #define CURRENT_MODE_ADDR 2
-#define IS_LED_ENABLED_ADDR 3
 #define IS_EFFECT_SWITCH_ADDR 4
 #define IS_SPARKS_ENABLED_ADDR 5
 #define IS_BACKGROUND_ENABLED_ADDR 6
@@ -326,7 +326,7 @@ bool isEffectSwitchEnabled = true;
 bool isSparksEnabled = IS_SPARKS_ENABLED;
 bool isBackgroundEnabled = IS_BACKGROUND_ENABLED;
 
-uint8_t genericModePosition = GENERIC_MODE_NOTAMESH;
+uint8_t genericModePosition = 0;
 uint8_t colorModePosition = 0;
 
 // -------------------------------------------------------------------------------------------
@@ -334,7 +334,6 @@ void saveToEEPROM() {
   EEPROM.update(MAGIC_VALUE_ADDR, MAGIC_VALUE);  // Write magic value
   EEPROM.update(LED_BRIGHTNESS_ADDR, ledBrightness);
   EEPROM.update(CURRENT_MODE_ADDR, currentModePose);
-  EEPROM.update(IS_LED_ENABLED_ADDR, isLedEnabled);
   EEPROM.update(IS_EFFECT_SWITCH_ADDR, isEffectSwitchEnabled);
   EEPROM.update(IS_SPARKS_ENABLED_ADDR, isSparksEnabled);
   EEPROM.update(IS_BACKGROUND_ENABLED_ADDR, isBackgroundEnabled);
@@ -352,7 +351,6 @@ void loadFromEEPROM() {
     // Load values from EEPROM
     ledBrightness = EEPROM.read(LED_BRIGHTNESS_ADDR);
     currentModePose = EEPROM.read(CURRENT_MODE_ADDR);
-    isLedEnabled = EEPROM.read(IS_LED_ENABLED_ADDR);
     isEffectSwitchEnabled = EEPROM.read(IS_EFFECT_SWITCH_ADDR);
     isSparksEnabled = EEPROM.read(IS_SPARKS_ENABLED_ADDR);
     isBackgroundEnabled = EEPROM.read(IS_BACKGROUND_ENABLED_ADDR);
@@ -894,6 +892,10 @@ void addBackground() {
 
 // -------------------------------------------------------------------------------------------
 void proceedCommands() {
+  if(!isLedEnabled && pendingCommand != COMMAND_TOGGLE_LED_ON){
+    return;
+  }
+
   switch(pendingCommand){
     case COMMAND_EMPTY: // No commands to execute
       break;
@@ -905,6 +907,7 @@ void proceedCommands() {
       } else if(genericModes[genericModePosition] == GENERIC_MODE_COLORS){
         if (++colorModePosition >= colorModesCount) colorModePosition = 0;
       }
+      setLedColorMagentaTime(100);
       break;
     case COMMAND_PREV_EFFECT: // Switch to previous effect or color
       if(genericModes[genericModePosition] == GENERIC_MODE_NOTAMESH) {
@@ -914,38 +917,67 @@ void proceedCommands() {
       } else if(genericModes[genericModePosition] == GENERIC_MODE_COLORS){
         if (--colorModePosition < 0) colorModePosition = colorModesCount - 1;
       }
+      setLedColorMagentaTime(100);
       break;
     case COMMAND_BRIGHTNESS_UP:
       if(ledBrightness <= (MAX_BRIGHTNESS - BRIGHTNESS_STEP)){
         ledBrightness += BRIGHTNESS_STEP;
       }
       LEDS.setBrightness(ledBrightness);
+      setLedColorCyanTime(100);
       break;
     case COMMAND_BRIGHTNESS_DOWN:
       if(ledBrightness >= (MIN_BRIGHTNESS + BRIGHTNESS_STEP)){
         ledBrightness -= BRIGHTNESS_STEP;
       }
       LEDS.setBrightness(ledBrightness);
+      setLedColorCyanTime(100);
       break;
     case COMMAND_TOGGLE_LED_ON:
       isLedEnabled = !isLedEnabled;
       if(isLedEnabled){
+        if(isEffectSwitchEnabled){
+          setLedColorGreenTime(2000);
+        } else {
+          setLedColorBlueTime(2000);
+        }
         LEDS.setBrightness(ledBrightness);
       } else {
-        LEDS.setBrightness(0);
+        setLedColorRed();
+        for (uintl i = 0; i < ledCount; i++) {
+          leds[i] = CRGB::Black;
+        }
+        FastLED.show();
       }
       break;
     case COMMAND_TOGGLE_EFFECT_SWITCH_ON:
       isEffectSwitchEnabled = !isEffectSwitchEnabled;
+      if(isEffectSwitchEnabled){
+        setLedColorGreenTime(2000);
+      } else {
+        setLedColorBlueTime(2000);
+      }
       break;
     case COMMAND_TOGGLE_SPARKS_ON:
       isSparksEnabled = !isSparksEnabled;
       isBackgroundEnabled = !isBackgroundEnabled;
+      setLedColorWhiteTime(100);
       break;
     case COMMAND_NEXT_GENERIC_MODE:
-      if (++genericModePosition >= (sizeof(genericModes) - 1)) genericModePosition = 0;
+      if (++genericModePosition >= (sizeof(genericModes) / sizeof(genericModes[0]))) {
+        genericModePosition = 0;
+      }
+      if (genericModePosition == GENERIC_MODE_NOTAMESH) {
+        setLedColorGreenTime(100);
+      } else if(genericModePosition == GENERIC_MODE_COLORS){
+        setLedColorBlueTime(100);
+      } else {
+        setLedColorRedTime(100);
+      }
+      
       break;
   }
+
   if(pendingCommand != COMMAND_EMPTY) {
     saveToEEPROM();
     pendingCommand = COMMAND_EMPTY;
@@ -1013,11 +1045,7 @@ void colorsLoop(){
     leds[i] = pgm_read_dword(&colorModes[colorModePosition]);
   }
 
-  static uint32_t showTimer = 0;
-  if (millis() - showTimer >= 10) {
-    showTimer = millis();
-    FastLED.show();
-  }
+  FastLED.show();
 }
 
 // -------------------------------------------------------------------------------------------
@@ -1034,7 +1062,6 @@ void effectsLoop(){
       colorsLoop();
       break;
   }
-
 }
 
 

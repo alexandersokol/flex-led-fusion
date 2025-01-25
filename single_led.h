@@ -4,19 +4,19 @@
 #include "config.h"
 
 #define setLedColorRed() setLedColor(255, 0, 0)
-#define setLedColorRed(delay) setLedColor(255, 0, 0, delay)
+#define setLedColorRedTime(delay) setLedColor(255, 0, 0, delay)
 #define setLedColorGreen() setLedColor(0, 255, 0)
-#define setLedColorGreen(delay) setLedColor(0, 255, 0, delay)
+#define setLedColorGreenTime(delay) setLedColor(0, 255, 0, delay)
 #define setLedColorBlue() setLedColor(0, 0, 255)
-#define setLedColorBlue(delay) setLedColor(0, 0, 255, delay)
+#define setLedColorBlueTime(delay) setLedColor(0, 0, 255, delay)
 #define setLedColorYellow() setLedColor(255, 255, 0)
-#define setLedColorYellow(delay) setLedColor(255, 255, 0, delay)
+#define setLedColorYellowTime(delay) setLedColor(255, 255, 0, delay)
 #define setLedColorCyan() setLedColor(0, 255, 255)
-#define setLedColorCyan(delay) setLedColor(0, 255, 255, delay)
+#define setLedColorCyanTime(delay) setLedColor(0, 255, 255, delay)
 #define setLedColorMagenta() setLedColor(255, 0, 255)
-#define setLedColorMagenta(delay) setLedColor(255, 0, 255, delay)
+#define setLedColorMagentaTime(delay) setLedColor(255, 0, 255, delay)
 #define setLedColorWhite() setLedColor(255, 255, 255)
-#define setLedColorWhite(delay) setLedColor(255, 255, 255, delay)
+#define setLedColorWhiteTime(delay) setLedColor(255, 255, 255, delay)
 
 uint32_t lastLedChange = 0;
 uint32_t ledTurnOffDelay = 0;
