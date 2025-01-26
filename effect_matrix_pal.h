@@ -4,41 +4,37 @@
 #include "effects.h"
 #include "utilities.h"
 
-/* Usage - matrix_pal();
-
-    This is one of the few routines I have with pixel counting.
-
-
-   currentPalette, targetPalette
-   effectThisRotation
-   effectThisIndex
-   effectBackgroundColor
-   effectBackgroundBrightness
-   effectThisDirection
-   thisbright
+/* One line matrix effect.
+  From Notamesh LED effects.
+  Usage - matrix_pal();
+    gCurrentPalette,
+    effectThisRotation
+    effectThisIndex
+    effectBackgroundColor
+    effectBackgroundBrightness
+    effectThisDirection
 */
 
-void matrix_pal() {                                           // One line matrix
+void matrix_pal() {
 
-  if (effectThisRotation) effectThisIndex++;                                   // Increase palette index to change colours on the fly
+  if (effectThisRotation) effectThisIndex++;
 
   if (ledCount >= 10) {
 
     if (random8(90) > 80) {
       if (effectThisDirection == -1)
-        leds[0] = ColorFromPalette(gCurrentPalette, effectThisIndex, 255, currentBlending);          // Foreground matrix colour
+        leds[0] = ColorFromPalette(gCurrentPalette, effectThisIndex, 255, currentBlending);
       else
         leds[ledCount - 1] = ColorFromPalette(gCurrentPalette, effectThisIndex, 255, currentBlending);
     } else {
       if (effectThisDirection == -1)
-        leds[0] = CHSV(effectBackgroundColor, 255, effectBackgroundBrightness);                                                        // Background colour
+        leds[0] = CHSV(effectBackgroundColor, 255, effectBackgroundBrightness);
       else
         leds[ledCount - 1] = CHSV(effectBackgroundColor, 255, effectBackgroundBrightness);
     }
 
     uintl i;
-
-    if (effectThisDirection == -1) {                                                                              // Move the foreground colour down the line.
+    if (effectThisDirection == -1) {
       for (i = ledCount - 1; i > 0 ; i-- ) leds[i] = leds[i - 1];
     } else {
       for (i = 0; i < ledCount - 1 ; i++ ) leds[i] = leds[i + 1];

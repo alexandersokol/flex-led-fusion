@@ -3,7 +3,6 @@
 
 // From ColorWavesWithPalettes by Mark Kriegsman: https://gist.github.com/kriegsman/8281905786e8b2632aeb
 
-
 // Gradient Color Palette definitions for 33 different cpt-city color palettes.
 //    956 bytes of PROGMEM for all of the palettes together,
 //   +618 bytes of PROGMEM for gradient palette code (AVR).
@@ -13,7 +12,6 @@
 // http://soliton.vm.bytemark.co.uk/pub/cpt-city/ing/xmas/tn/ib_jul01.png.index.html
 // converted for FastLED with gammas (2.6, 2.2, 2.5)
 // Size: 16 bytes of program space.
-
 DEFINE_GRADIENT_PALETTE( ib_jul01_gp ) {
   0, 194,  1,  1,
   94,   1, 29, 18,
@@ -25,7 +23,6 @@ DEFINE_GRADIENT_PALETTE( ib_jul01_gp ) {
 // http://soliton.vm.bytemark.co.uk/pub/cpt-city/es/vintage/tn/es_vintage_57.png.index.html
 // converted for FastLED with gammas (2.6, 2.2, 2.5)
 // Size: 20 bytes of program space.
-
 DEFINE_GRADIENT_PALETTE( es_vintage_57_gp ) {
   0,   2,  1,  1,
   53,  18,  1,  0,
@@ -38,7 +35,6 @@ DEFINE_GRADIENT_PALETTE( es_vintage_57_gp ) {
 // http://soliton.vm.bytemark.co.uk/pub/cpt-city/es/vintage/tn/es_vintage_01.png.index.html
 // converted for FastLED with gammas (2.6, 2.2, 2.5)
 // Size: 32 bytes of program space.
-
 DEFINE_GRADIENT_PALETTE( es_vintage_01_gp ) {
   0,   4,  1,  1,
   51,  16,  0,  1,
@@ -54,7 +50,6 @@ DEFINE_GRADIENT_PALETTE( es_vintage_01_gp ) {
 // http://soliton.vm.bytemark.co.uk/pub/cpt-city/es/rivendell/tn/es_rivendell_15.png.index.html
 // converted for FastLED with gammas (2.6, 2.2, 2.5)
 // Size: 20 bytes of program space.
-
 DEFINE_GRADIENT_PALETTE( es_rivendell_15_gp ) {
   0,   1, 14,  5,
   101,  16, 36, 14,
@@ -67,7 +62,6 @@ DEFINE_GRADIENT_PALETTE( es_rivendell_15_gp ) {
 // http://soliton.vm.bytemark.co.uk/pub/cpt-city/ds/rgi/tn/rgi_15.png.index.html
 // converted for FastLED with gammas (2.6, 2.2, 2.5)
 // Size: 36 bytes of program space.
-
 DEFINE_GRADIENT_PALETTE( rgi_15_gp ) {
   0,   4,  1, 31,
   31,  55,  1, 16,
@@ -84,7 +78,6 @@ DEFINE_GRADIENT_PALETTE( rgi_15_gp ) {
 // http://soliton.vm.bytemark.co.uk/pub/cpt-city/ma/retro2/tn/retro2_16.png.index.html
 // converted for FastLED with gammas (2.6, 2.2, 2.5)
 // Size: 8 bytes of program space.
-
 DEFINE_GRADIENT_PALETTE( retro2_16_gp ) {
   0, 188, 135,  1,
   255,  46,  7,  1
@@ -94,7 +87,6 @@ DEFINE_GRADIENT_PALETTE( retro2_16_gp ) {
 // http://soliton.vm.bytemark.co.uk/pub/cpt-city/nd/red/tn/Analogous_1.png.index.html
 // converted for FastLED with gammas (2.6, 2.2, 2.5)
 // Size: 20 bytes of program space.
-
 DEFINE_GRADIENT_PALETTE( Analogous_1_gp ) {
   0,   3,  0, 255,
   63,  23,  0, 255,
@@ -107,7 +99,6 @@ DEFINE_GRADIENT_PALETTE( Analogous_1_gp ) {
 // http://soliton.vm.bytemark.co.uk/pub/cpt-city/es/pink_splash/tn/es_pinksplash_08.png.index.html
 // converted for FastLED with gammas (2.6, 2.2, 2.5)
 // Size: 20 bytes of program space.
-
 DEFINE_GRADIENT_PALETTE( es_pinksplash_08_gp ) {
   0, 126, 11, 255,
   127, 197,  1, 22,
@@ -120,7 +111,6 @@ DEFINE_GRADIENT_PALETTE( es_pinksplash_08_gp ) {
 // http://soliton.vm.bytemark.co.uk/pub/cpt-city/es/pink_splash/tn/es_pinksplash_07.png.index.html
 // converted for FastLED with gammas (2.6, 2.2, 2.5)
 // Size: 28 bytes of program space.
-
 DEFINE_GRADIENT_PALETTE( es_pinksplash_07_gp ) {
   0, 229,  1,  1,
   61, 242,  4, 63,
@@ -135,7 +125,6 @@ DEFINE_GRADIENT_PALETTE( es_pinksplash_07_gp ) {
 // http://soliton.vm.bytemark.co.uk/pub/cpt-city/nd/other/tn/Coral_reef.png.index.html
 // converted for FastLED with gammas (2.6, 2.2, 2.5)
 // Size: 24 bytes of program space.
-
 DEFINE_GRADIENT_PALETTE( Coral_reef_gp ) {
   0,  40, 199, 197,
   50,  10, 152, 155,
@@ -149,7 +138,6 @@ DEFINE_GRADIENT_PALETTE( Coral_reef_gp ) {
 // http://soliton.vm.bytemark.co.uk/pub/cpt-city/es/ocean_breeze/tn/es_ocean_breeze_068.png.index.html
 // converted for FastLED with gammas (2.6, 2.2, 2.5)
 // Size: 24 bytes of program space.
-
 DEFINE_GRADIENT_PALETTE( es_ocean_breeze_068_gp ) {
   0, 100, 156, 153,
   51,   1, 99, 137,
@@ -163,7 +151,6 @@ DEFINE_GRADIENT_PALETTE( es_ocean_breeze_068_gp ) {
 // http://soliton.vm.bytemark.co.uk/pub/cpt-city/es/ocean_breeze/tn/es_ocean_breeze_036.png.index.html
 // converted for FastLED with gammas (2.6, 2.2, 2.5)
 // Size: 16 bytes of program space.
-
 DEFINE_GRADIENT_PALETTE( es_ocean_breeze_036_gp ) {
   0,   1,  6,  7,
   89,   1, 99, 111,
@@ -175,7 +162,6 @@ DEFINE_GRADIENT_PALETTE( es_ocean_breeze_036_gp ) {
 // http://soliton.vm.bytemark.co.uk/pub/cpt-city/mjf/tn/departure.png.index.html
 // converted for FastLED with gammas (2.6, 2.2, 2.5)
 // Size: 88 bytes of program space.
-
 DEFINE_GRADIENT_PALETTE( departure_gp ) {
   0,   8,  3,  0,
   42,  23,  7,  0,
@@ -195,7 +181,6 @@ DEFINE_GRADIENT_PALETTE( departure_gp ) {
 // http://soliton.vm.bytemark.co.uk/pub/cpt-city/es/landscape/tn/es_landscape_64.png.index.html
 // converted for FastLED with gammas (2.6, 2.2, 2.5)
 // Size: 36 bytes of program space.
-
 DEFINE_GRADIENT_PALETTE( es_landscape_64_gp ) {
   0,   0,  0,  0,
   37,   2, 25,  1,
@@ -212,7 +197,6 @@ DEFINE_GRADIENT_PALETTE( es_landscape_64_gp ) {
 // http://soliton.vm.bytemark.co.uk/pub/cpt-city/es/landscape/tn/es_landscape_33.png.index.html
 // converted for FastLED with gammas (2.6, 2.2, 2.5)
 // Size: 24 bytes of program space.
-
 DEFINE_GRADIENT_PALETTE( es_landscape_33_gp ) {
   0,   1,  5,  0,
   19,  32, 23,  1,
@@ -226,7 +210,6 @@ DEFINE_GRADIENT_PALETTE( es_landscape_33_gp ) {
 // http://soliton.vm.bytemark.co.uk/pub/cpt-city/ma/icecream/tn/rainbowsherbet.png.index.html
 // converted for FastLED with gammas (2.6, 2.2, 2.5)
 // Size: 28 bytes of program space.
-
 DEFINE_GRADIENT_PALETTE( rainbowsherbet_gp ) {
   0, 255, 33,  4,
   43, 255, 68, 25,
@@ -241,7 +224,6 @@ DEFINE_GRADIENT_PALETTE( rainbowsherbet_gp ) {
 // http://soliton.vm.bytemark.co.uk/pub/cpt-city/hult/tn/gr65_hult.png.index.html
 // converted for FastLED with gammas (2.6, 2.2, 2.5)
 // Size: 24 bytes of program space.
-
 DEFINE_GRADIENT_PALETTE( gr65_hult_gp ) {
   0, 247, 176, 247,
   48, 255, 136, 255,
@@ -255,7 +237,6 @@ DEFINE_GRADIENT_PALETTE( gr65_hult_gp ) {
 // http://soliton.vm.bytemark.co.uk/pub/cpt-city/hult/tn/gr64_hult.png.index.html
 // converted for FastLED with gammas (2.6, 2.2, 2.5)
 // Size: 32 bytes of program space.
-
 DEFINE_GRADIENT_PALETTE( gr64_hult_gp ) {
   0,   1, 124, 109,
   66,   1, 93, 79,
@@ -271,7 +252,6 @@ DEFINE_GRADIENT_PALETTE( gr64_hult_gp ) {
 // http://soliton.vm.bytemark.co.uk/pub/cpt-city/gmt/tn/GMT_drywet.png.index.html
 // converted for FastLED with gammas (2.6, 2.2, 2.5)
 // Size: 28 bytes of program space.
-
 DEFINE_GRADIENT_PALETTE( GMT_drywet_gp ) {
   0,  47, 30,  2,
   42, 213, 147, 24,
@@ -286,7 +266,6 @@ DEFINE_GRADIENT_PALETTE( GMT_drywet_gp ) {
 // http://soliton.vm.bytemark.co.uk/pub/cpt-city/ing/general/tn/ib15.png.index.html
 // converted for FastLED with gammas (2.6, 2.2, 2.5)
 // Size: 24 bytes of program space.
-
 DEFINE_GRADIENT_PALETTE( ib15_gp ) {
   0, 113, 91, 147,
   72, 157, 88, 78,
@@ -300,7 +279,6 @@ DEFINE_GRADIENT_PALETTE( ib15_gp ) {
 // http://soliton.vm.bytemark.co.uk/pub/cpt-city/ds/fuschia/tn/Fuschia-7.png.index.html
 // converted for FastLED with gammas (2.6, 2.2, 2.5)
 // Size: 20 bytes of program space.
-
 DEFINE_GRADIENT_PALETTE( Fuschia_7_gp ) {
   0,  43,  3, 153,
   63, 100,  4, 103,
@@ -313,7 +291,6 @@ DEFINE_GRADIENT_PALETTE( Fuschia_7_gp ) {
 // http://soliton.vm.bytemark.co.uk/pub/cpt-city/es/emerald_dragon/tn/es_emerald_dragon_08.png.index.html
 // converted for FastLED with gammas (2.6, 2.2, 2.5)
 // Size: 16 bytes of program space.
-
 DEFINE_GRADIENT_PALETTE( es_emerald_dragon_08_gp ) {
   0,  97, 255,  1,
   101,  47, 133,  1,
@@ -325,7 +302,6 @@ DEFINE_GRADIENT_PALETTE( es_emerald_dragon_08_gp ) {
 // http://soliton.vm.bytemark.co.uk/pub/cpt-city/neota/elem/tn/lava.png.index.html
 // converted for FastLED with gammas (2.6, 2.2, 2.5)
 // Size: 52 bytes of program space.
-
 DEFINE_GRADIENT_PALETTE( lava_gp ) {
   0,   0,  0,  0,
   46,  18,  0,  0,
@@ -346,7 +322,6 @@ DEFINE_GRADIENT_PALETTE( lava_gp ) {
 // http://soliton.vm.bytemark.co.uk/pub/cpt-city/neota/elem/tn/fire.png.index.html
 // converted for FastLED with gammas (2.6, 2.2, 2.5)
 // Size: 28 bytes of program space.
-
 DEFINE_GRADIENT_PALETTE( fire_gp ) {
   0,   1,  1,  0,
   76,  32,  5,  0,
@@ -361,7 +336,6 @@ DEFINE_GRADIENT_PALETTE( fire_gp ) {
 // http://soliton.vm.bytemark.co.uk/pub/cpt-city/nd/atmospheric/tn/Colorfull.png.index.html
 // converted for FastLED with gammas (2.6, 2.2, 2.5)
 // Size: 44 bytes of program space.
-
 DEFINE_GRADIENT_PALETTE( Colorfull_gp ) {
   0,  10, 85,  5,
   25,  29, 109, 18,
@@ -380,7 +354,6 @@ DEFINE_GRADIENT_PALETTE( Colorfull_gp ) {
 // http://soliton.vm.bytemark.co.uk/pub/cpt-city/nd/atmospheric/tn/Magenta_Evening.png.index.html
 // converted for FastLED with gammas (2.6, 2.2, 2.5)
 // Size: 28 bytes of program space.
-
 DEFINE_GRADIENT_PALETTE( Magenta_Evening_gp ) {
   0,  71, 27, 39,
   31, 130, 11, 51,
@@ -395,7 +368,6 @@ DEFINE_GRADIENT_PALETTE( Magenta_Evening_gp ) {
 // http://soliton.vm.bytemark.co.uk/pub/cpt-city/nd/atmospheric/tn/Pink_Purple.png.index.html
 // converted for FastLED with gammas (2.6, 2.2, 2.5)
 // Size: 44 bytes of program space.
-
 DEFINE_GRADIENT_PALETTE( Pink_Purple_gp ) {
   0,  19,  2, 39,
   25,  26,  4, 45,
@@ -414,7 +386,6 @@ DEFINE_GRADIENT_PALETTE( Pink_Purple_gp ) {
 // http://soliton.vm.bytemark.co.uk/pub/cpt-city/nd/atmospheric/tn/Sunset_Real.png.index.html
 // converted for FastLED with gammas (2.6, 2.2, 2.5)
 // Size: 28 bytes of program space.
-
 DEFINE_GRADIENT_PALETTE( Sunset_Real_gp ) {
   0, 120,  0,  0,
   22, 179, 22,  0,
@@ -429,7 +400,6 @@ DEFINE_GRADIENT_PALETTE( Sunset_Real_gp ) {
 // http://soliton.vm.bytemark.co.uk/pub/cpt-city/es/autumn/tn/es_autumn_19.png.index.html
 // converted for FastLED with gammas (2.6, 2.2, 2.5)
 // Size: 52 bytes of program space.
-
 DEFINE_GRADIENT_PALETTE( es_autumn_19_gp ) {
   0,  26,  1,  1,
   51,  67,  4,  1,
@@ -450,7 +420,6 @@ DEFINE_GRADIENT_PALETTE( es_autumn_19_gp ) {
 // http://soliton.vm.bytemark.co.uk/pub/cpt-city/nd/basic/tn/BlacK_Blue_Magenta_White.png.index.html
 // converted for FastLED with gammas (2.6, 2.2, 2.5)
 // Size: 28 bytes of program space.
-
 DEFINE_GRADIENT_PALETTE( BlacK_Blue_Magenta_White_gp ) {
   0,   0,  0,  0,
   42,   0,  0, 45,
@@ -465,7 +434,6 @@ DEFINE_GRADIENT_PALETTE( BlacK_Blue_Magenta_White_gp ) {
 // http://soliton.vm.bytemark.co.uk/pub/cpt-city/nd/basic/tn/BlacK_Magenta_Red.png.index.html
 // converted for FastLED with gammas (2.6, 2.2, 2.5)
 // Size: 20 bytes of program space.
-
 DEFINE_GRADIENT_PALETTE( BlacK_Magenta_Red_gp ) {
   0,   0,  0,  0,
   63,  42,  0, 45,
@@ -478,7 +446,6 @@ DEFINE_GRADIENT_PALETTE( BlacK_Magenta_Red_gp ) {
 // http://soliton.vm.bytemark.co.uk/pub/cpt-city/nd/basic/tn/BlacK_Red_Magenta_Yellow.png.index.html
 // converted for FastLED with gammas (2.6, 2.2, 2.5)
 // Size: 28 bytes of program space.
-
 DEFINE_GRADIENT_PALETTE( BlacK_Red_Magenta_Yellow_gp ) {
   0,   0,  0,  0,
   42,  42,  0,  0,
@@ -493,7 +460,6 @@ DEFINE_GRADIENT_PALETTE( BlacK_Red_Magenta_Yellow_gp ) {
 // http://soliton.vm.bytemark.co.uk/pub/cpt-city/nd/basic/tn/Blue_Cyan_Yellow.png.index.html
 // converted for FastLED with gammas (2.6, 2.2, 2.5)
 // Size: 20 bytes of program space.
-
 DEFINE_GRADIENT_PALETTE( Blue_Cyan_Yellow_gp ) {
   0,   0,  0, 255,
   63,   0, 55, 255,
@@ -506,7 +472,6 @@ DEFINE_GRADIENT_PALETTE( Blue_Cyan_Yellow_gp ) {
 // http://soliton.vm.bytemark.co.uk/pub/cpt-city/bhw/bhw1/tn/bhw1_28.png.index.html
 // converted for FastLED with gammas (2.6, 2.2, 2.5)
 // Size: 32 bytes of program space.
-
 DEFINE_GRADIENT_PALETTE( bhw1_28_gp ) {
   0,  75,  1, 221,
   30, 252, 73, 255,
@@ -517,7 +482,6 @@ DEFINE_GRADIENT_PALETTE( bhw1_28_gp ) {
   232,  78, 12, 214,
   255,   0, 149, 242
 };
-
 
 // Single array of defined cpt-city color palettes.
 // This will let us programmatically choose one based on
@@ -566,10 +530,7 @@ const TProgmemRGBGradientPaletteRef gGradientPalettes[] = {
   bhw1_28_gp
 };
 
-
 // Count of how many cpt-city gradients are defined:
-const uint8_t gGradientPaletteCount =
-  sizeof( gGradientPalettes) / sizeof( TProgmemRGBGradientPaletteRef );
+const uint8_t gGradientPaletteCount = sizeof( gGradientPalettes) / sizeof( TProgmemRGBGradientPaletteRef );
 
-
-#endif
+#endif // GRADIENT_PALETTES_H

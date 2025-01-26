@@ -1,6 +1,11 @@
 #ifndef EFFECT_CANDLES_H
 #define EFFECT_CANDLES_H
 
+/*
+  Candles effect.
+  From AlexGyver repo.
+  Usage: candles();
+*/
 void candles() {
   if (ledCount >= 10) {
 

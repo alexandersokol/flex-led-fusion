@@ -4,25 +4,27 @@
 #include "effects.h"
 #include "utilities.h"
 
-/* This is adapted from a routine created by Mark Kriegsman */
-
-/*  Usage - noise8();
-  effectThisDirection
+/*
+  Noise8 effect.
+  This is adapted from a routine created by Mark Kriegsman.
+  From Notamesh LED effects.
+  Usage - noise8();
+    effectThisDirection
 */
 
-uint16_t dist = 12345;         // A random number for our noise generator.
+uint16_t dist = 12345;       // A random number for our noise generator.
 uint8_t scale = 30;          // Wouldn't recommend changing this on the fly, or the animation will be really blocky.
 
 void noise8_pal() {
 
   uintl i;
   if (ledCount >= 10) {
-    for ( i = 0; i < ledCount; i++) {                                     // Just ONE loop to fill up the LED array as all of the pixels change.
-      uint8_t index = inoise8(i * scale, dist + i * scale) % 255;            // Get a value from the noise function. I'm using both x and y axis.
-      leds[i] = ColorFromPalette(gCurrentPalette, index, 255, currentBlending);   // With that value, look up the 8 bit colour palette value and assign it to the current LED.
+    for ( i = 0; i < ledCount; i++) {
+      uint8_t index = inoise8(i * scale, dist + i * scale) % 255;
+      leds[i] = ColorFromPalette(gCurrentPalette, index, 255, currentBlending);
     }
-    dist += beatsin8(10, 1, 4) * effectThisDirection;                                            // Moving along the distance (that random number we started out with). Vary it a bit with a sine wave.
-  }                                                                                  // In some sketches, I've used millis() instead of an incremented counter. Works a treat.
+    dist += beatsin8(10, 1, 4) * effectThisDirection;
+  }
 } // noise8_pal()
 
 #endif // EFFECT_NOISE8_PAL_H

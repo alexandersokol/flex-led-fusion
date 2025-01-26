@@ -396,14 +396,14 @@ void strobeMode(uint8_t mode, bool modeChange) { // mc stands for 'Mode Change',
       effectThisDelay = 10;
       effectAllFrequency = 2;
       effectThisSpeed = 1;
-      thatspeed = 2;
+      thatSpeed = 2;
       effectThisHue = 0;
-      thathue = 128;
+      thatHue = 128;
       effectThisDirection = 1;
       effectThisRotation = 1;
-      thatrot = 1;
+      thatRotation = 1;
       effectThisCutOff = 128;
-      thatcutoff = 192;
+      thatCutOff = 192;
     }
     two_sin();
     break;
@@ -434,14 +434,14 @@ void strobeMode(uint8_t mode, bool modeChange) { // mc stands for 'Mode Change',
       effectThisDelay = 10;
       effectAllFrequency = 4;
       effectThisSpeed = -1;
-      thatspeed = 0;
+      thatSpeed = 0;
       effectThisHue = 64;
-      thathue = 192;
+      thatHue = 192;
       effectThisDirection = 1;
       effectThisRotation = 0;
-      thatrot = 0;
+      thatRotation = 0;
       effectThisCutOff = 64;
-      thatcutoff = 192;
+      thatCutOff = 192;
     }
     two_sin();
     break;
@@ -464,7 +464,7 @@ void strobeMode(uint8_t mode, bool modeChange) { // mc stands for 'Mode Change',
   case EFFECT_JUGGLE_1:
     if (modeChange) {
       effectThisDelay = 10;
-      numdots = 2;
+      numDots = 2;
       effectThisFade = 16;
       effectThisBeat = 8;
       effectThisDiff = 64;
@@ -487,14 +487,14 @@ void strobeMode(uint8_t mode, bool modeChange) { // mc stands for 'Mode Change',
       effectThisDelay = 10;
       effectAllFrequency = 6;
       effectThisSpeed = 2;
-      thatspeed = 3;
+      thatSpeed = 3;
       effectThisHue = 96;
-      thathue = 224;
+      thatHue = 224;
       effectThisDirection = 1;
       effectThisRotation = 0;
-      thatrot = 0;
+      thatRotation = 0;
       effectThisCutOff = 64;
-      thatcutoff = 64;
+      thatCutOff = 64;
     }
     two_sin();
     break;
@@ -550,14 +550,14 @@ void strobeMode(uint8_t mode, bool modeChange) { // mc stands for 'Mode Change',
       effectThisDelay = 10;
       effectAllFrequency = 20;
       effectThisSpeed = 2;
-      thatspeed = -1;
+      thatSpeed = -1;
       effectThisHue = 24;
-      thathue = 180;
+      thatHue = 180;
       effectThisDirection = 1;
       effectThisRotation = 0;
-      thatrot = 1;
+      thatRotation = 1;
       effectThisCutOff = 64;
-      thatcutoff = 128;
+      thatCutOff = 128;
     }
     two_sin();
     break;
@@ -589,14 +589,14 @@ void strobeMode(uint8_t mode, bool modeChange) { // mc stands for 'Mode Change',
       effectThisDelay = 20;
       effectAllFrequency = 10;
       effectThisSpeed = 1;
-      thatspeed = -2;
+      thatSpeed = -2;
       effectThisHue = 48;
-      thathue = 160;
+      thatHue = 160;
       effectThisDirection = -1;
       effectThisRotation = 1;
-      thatrot = -1;
+      thatRotation = -1;
       effectThisCutOff = 128;
-      thatcutoff = 192;
+      thatCutOff = 192;
     }
     two_sin();
     break;
@@ -633,16 +633,16 @@ void strobeMode(uint8_t mode, bool modeChange) { // mc stands for 'Mode Change',
     if (modeChange) {
       effectThisDelay = 20;
       effectPalleteChange = 0;
-      hxyinc = random16(1, 15);
+      hXYinc = random16(1, 15);
       octaves = random16(1, 3);
-      hue_octaves = random16(1, 5);
-      hue_scale = random16(10, 50);
+      hueOctaves = random16(1, 5);
+      hueScale = random16(10, 50);
       x = random16();
-      xscale = random16();
+      xScale = random16();
       hxy = random16();
-      hue_time = random16();
-      hue_speed = random16(1, 3);
-      x_speed = random16(1, 30);
+      hueTime = random16();
+      hueSpeed = random16(1, 3);
+      xSpeed = random16(1, 30);
     }
     noise16_pal();
     break;
@@ -681,14 +681,14 @@ void strobeMode(uint8_t mode, bool modeChange) { // mc stands for 'Mode Change',
     if (modeChange) {
       effectThisDelay = 10;
       effectThisSpeed = 2;
-      thatspeed = 3;
+      thatSpeed = 3;
       effectThisHue = 96;
-      thathue = 224;
+      thatHue = 224;
       effectThisDirection = 1;
       effectThisRotation = 1;
-      thatrot = 2;
+      thatRotation = 2;
       effectThisCutOff = 128;
-      thatcutoff = 64;
+      thatCutOff = 64;
     }
     two_sin();
     break;
@@ -737,7 +737,7 @@ void strobeMode(uint8_t mode, bool modeChange) { // mc stands for 'Mode Change',
   case EFFECT_JUGGLE_2:
     if (modeChange) {
       effectThisDelay = 10;
-      numdots = 4;
+      numDots = 4;
       effectThisFade = 32;
       effectThisBeat = 12;
       effectThisDiff = 20;
@@ -798,13 +798,13 @@ void strobeMode(uint8_t mode, bool modeChange) { // mc stands for 'Mode Change',
       effectThisDelay = 20;
       effectPalleteChange = 0;
       octaves = 1;
-      hue_octaves = 2;
+      hueOctaves = 2;
       hxy = 6000;
       x = 5000;
-      xscale = 3000;
-      hue_scale = 50;
-      hue_speed = 15;
-      x_speed = 100;
+      xScale = 3000;
+      hueScale = 50;
+      hueSpeed = 15;
+      xSpeed = 100;
     }
     noise16_pal();
     break;

@@ -3,24 +3,20 @@
 
 #include "effects.h"
 
-// effectThisDirection
+/*
+  This function draws color waves with an ever-changing, widely-varying set of parameters, using a color palette.
+  Animated shifting color waves, with several cross-fading color palettes.
+  by Mark Kriegsman, August 2015
+  
+  Color palettes courtesy of cpt-city and its contributors:
+  http://soliton.vm.bytemark.co.uk/pub/cpt-city/
 
-// ColorWavesWithPalettes
-// Animated shifting color waves, with several cross-fading color palettes.
-// by Mark Kriegsman, August 2015
-//
-// Color palettes courtesy of cpt-city and its contributors:
-//   http://soliton.vm.bytemark.co.uk/pub/cpt-city/
-//
-// Color palettes converted for FastLED using "PaletteKnife" v1:
-//   http://fastled.io/tools/paletteknife/
-//
+  Color palettes converted for FastLED using "PaletteKnife" v1:
+  http://fastled.io/tools/paletteknife/
 
-
-// This function draws color waves with an ever-changing,
-// widely-varying set of parameters, using a color palette.
-
-
+  Usage: colorwaves();
+    effectThisDirection
+*/
 void colorwaves()
 {
   static uint16_t sPseudotime = 0;
@@ -62,17 +58,15 @@ void colorwaves()
       bri8 += (255 - brightdepth);
 
       uint8_t index = hue8;
-      //index = triwave8( index);
       index = scale8( index, 240);
 
       CRGB newcolor = ColorFromPalette(gCurrentPalette, index, bri8);
-      if (effectThisDirection == 1)        //направление
+      if (effectThisDirection == 1)
         nblend( leds[(ledCount - 1) - i], newcolor, 128);
       else
         nblend( leds[i], newcolor, 128);
     }
   }
-
-}
+} // colorwaves()
 
 #endif // EFFECT_COLORWAVE_H

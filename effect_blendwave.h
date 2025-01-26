@@ -3,6 +3,11 @@
 
 #include "utilities.h"
 
+/*
+  Blendwave effect.
+  From Notamesh LED effects.
+  Usage: blendwave();
+*/
 void blendwave() {
   CRGB clr1;
   CRGB clr2;
@@ -21,6 +26,6 @@ void blendwave() {
     fill_gradient_RGB(leds, 0, clr2, loc1, clr1);
     fill_gradient_RGB(leds, loc1, clr2, ledCount - 1, clr1);
   }
-}
+} // blendwave()
 
 #endif // EFFECT_BLENDWARE_H

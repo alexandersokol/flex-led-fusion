@@ -1,11 +1,15 @@
 #ifndef EFFECT_THREE_SIN_PAL_H
 #define EFFECT_THREE_SIN_PAL_H
 
+#include "utilities.h"
 #include "effects.h"
 
-// three_sin_pal variables ---------------------------------------------------------------------
-// effectThisDirection
-
+/*
+  Three sin effect.
+  From Notamesh LED effects.
+  Usage: three_sin_pal();
+    effectThisDirection
+*/
 int wave1;
 int wave2;
 int wave3;
@@ -20,13 +24,7 @@ void three_sin_pal() {
     wave2 += beatsin8(15, -2, 2) * effectThisDirection;
     wave3 += beatsin8(12, -3, 3) * effectThisDirection;
 
-#if MAX_LEDS < 255
-    uint8_t k;
-#else
-    uint16_t k;
-#endif
-
-    for (k = 0; k < ledCount; k++) {
+    for (uintl k = 0; k < ledCount; k++) {
       uint8_t tmp = sin8(mul1 * k + wave1) + sin8(mul1 * k + wave2) + sin8(mul1 * k + wave3);
       leds[k] = ColorFromPalette(gCurrentPalette, tmp, 255, currentBlending);
     }

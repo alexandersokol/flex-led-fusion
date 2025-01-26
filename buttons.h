@@ -21,7 +21,7 @@
       queueCommand(COMMAND_BRIGHTNESS_DOWN);
     }
     if(buttonYellow.isTriple()){
-      // TODO Yellow button tripple click
+      queueCommand(COMMAND_TOGGLE_SPARKS_ON);
     }
     if(buttonBlue.isSingle()){
       queueCommand(COMMAND_NEXT_EFFECT);

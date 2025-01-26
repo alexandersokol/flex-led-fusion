@@ -3,18 +3,19 @@
 
 #include "effects.h"
 
-/* Usage - rainbow_march();
-
-   effectThisIndex
-   effectThisDiff
-   effectThisRotation
-   effectThisDirection
+/* 
+  Rainbow march effect.
+  From Notamesh LED effects.
+  Usage - rainbow_march();
+    effectThisIndex
+    effectThisDiff
+    effectThisRotation
+    effectThisDirection
 */
-
-void rainbow_march() {                                           // The fill_rainbow call doesn't support brightness levels
+void rainbow_march() {
   if (ledCount >= 10) {
     effectThisIndex += effectThisRotation * effectThisDirection;
-    fill_rainbow(leds, ledCount, effectThisIndex, effectThisDiff);               // I don't change deltahue on the fly as it's too fast near the end of the strip.
+    fill_rainbow(leds, ledCount, effectThisIndex, effectThisDiff);
   }
 } // rainbow_march()
 

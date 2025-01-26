@@ -1,8 +1,8 @@
 #ifndef UTILITIES_H
 #define UTILITIES_H
 
-#define qsubd(x, b) ((x > b) ? 255 : 0)                     // A digital unsigned subtraction macro. if result <0, then => 0. Otherwise, take on fixed value.
-#define qsuba(x, b) ((x > b) ? x - b : 0)                            // Unsigned subtraction macro. if result <0, then => 0.
+#define qsubd(x, b) ((x > b) ? 255 : 0)
+#define qsuba(x, b) ((x > b) ? x - b : 0)
 
 #if MAX_LEDS < 255
   #define uintl uint8_t
