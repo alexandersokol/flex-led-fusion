@@ -1003,15 +1003,15 @@ void notameshLoop()
         else
           gCurrentPaletteNumber = 0;
       }
-      gTargetPalette = gGradientPalettes[gCurrentPaletteNumber]; // We're just ensuring that the gTargetPalette WILL be assigned.
+      gTargetPalette = gGradientPalettes[gCurrentPaletteNumber];
     }
   }
 #endif
 
-  EVERY_N_MILLIS_I(thistimer, effectThisDelay) { // Sets the original delay time.
-    thistimer.setPeriod(effectThisDelay); // This is how you update the delay value on the fly.
-    ledCount = MAX_LEDS;            // Выводим Эффект на все светодиоды
-    strobeMode(ledMode, 0);        // отобразить эффект;
+  EVERY_N_MILLIS_I(thistimer, effectThisDelay) {
+    thistimer.setPeriod(effectThisDelay);
+    ledCount = MAX_LEDS;
+    strobeMode(ledMode, 0);
   }
 
   if(isEffectSwitchEnabled) {
