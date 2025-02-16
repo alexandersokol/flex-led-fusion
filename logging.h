@@ -11,4 +11,10 @@
   #define LOG_PRINTLN(...) // Do nothing
 #endif
 
+#if IS_LOGS_ON
+  #define LOG_SERIAL(...) Serial.begin(__VA_ARGS__)
+#else
+  #define LOG_SERIAL(...)   // Do nothing
+#endif
+
 #endif // LOGGING_H

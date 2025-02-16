@@ -322,7 +322,7 @@ const uint8_t colorModesCount = sizeof(colorModes);
 uint8_t ledBrightness = MAX_BRIGHTNESS;
 uint8_t currentModePose = 0;
 bool isLedEnabled = true;
-bool isEffectSwitchEnabled = true;
+bool isEffectSwitchEnabled = false;
 bool isSparksEnabled = IS_SPARKS_ENABLED;
 bool isBackgroundEnabled = IS_BACKGROUND_ENABLED;
 

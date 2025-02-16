@@ -1,9 +1,7 @@
 #include "dependencies.h"
 
-uint8_t commandToExecute = COMMAND_EMPTY;
-
 void setup() {
-  Serial.begin(9600);
+  LOG_SERIAL(9600);
 
   IR_BEGIN();
   setupEffects();
